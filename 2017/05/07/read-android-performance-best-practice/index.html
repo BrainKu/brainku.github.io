@@ -90,7 +90,7 @@
 <meta property="og:url" content="https://brainku.github.io/2017/05/07/read-android-performance-best-practice/index.html">
 <meta property="og:site_name" content="Self Driven">
 <meta property="og:description" content="正文有好长一段时间没留意过（快有一年了说不定）市面上 Android 相关的开发书籍了。前几天面试完的时候领导突然让我给他推荐几本 android 开发相关的「好书」，我才又去亚马逊翻了一下排行榜。《Android应用性能优化最佳实践》这本书给我留下了一点印象，作者好像很厉害，T家音乐的十年总监，评价也都是五星。唔，看起来不错，只是没看过不好评价。晚上写清单给领导的时候他竟然刚好也提到了这本书，这">
-<meta property="og:updated_time" content="2017-05-07T04:20:31.000Z">
+<meta property="og:updated_time" content="2017-05-07T13:08:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Android应用性能优化最佳实践》个毛线">
 <meta name="twitter:description" content="正文有好长一段时间没留意过（快有一年了说不定）市面上 Android 相关的开发书籍了。前几天面试完的时候领导突然让我给他推荐几本 android 开发相关的「好书」，我才又去亚马逊翻了一下排行榜。《Android应用性能优化最佳实践》这本书给我留下了一点印象，作者好像很厉害，T家音乐的十年总监，评价也都是五星。唔，看起来不错，只是没看过不好评价。晚上写清单给领导的时候他竟然刚好也提到了这本书，这">
@@ -332,7 +332,7 @@
 <p>第二章开始我就发现了不少小错误，有些还是 Java 基础的问题，我开始有种「这作者行吗」的感觉。</p>
 <p>而真正可怕的是从第三章开始。从他开始讲GC那一小节开始之后，我就基本看不下了。<br>这个人真的有了解过 Android GC 吗，感觉他就是在强行解释。无论是可达性，还是Android用的 GC 算法，每个都讲得特别扯淡。最可怕的是 GC 的分代模型他竟然是拿 Hotsport 的图片来讲的。喂喂喂，Hotspot 是什么，Dalvik 又是什么？Dalvik 里新生代还分了两个 Survivor ？而且还是用了 mark-copy？糟点太多了根本数不过来。之后只要一讲到GC，我全选择跳过，受不了这么扯淡的。</p>
 <p>后面那些章节，我还发现不少了未注明来源的「引用」。<br>首先是代码的引用。<br>监控检测那里说是介绍某些「监控框架」的代码，然后开始大段大段地改别人的开源项目，到最后也没写这个项目是什么。对比过他改后的代码，大致就是一些命名的区别，其他的基本一致。另外有区别的就是自己加了一个所谓的上报接口？<br>书里还有些是国外博客和官方文档的翻译。<br>最后两章讲 JobScheduler 跟 Doze 的那些内容没多少是原创的吧。话说，我真想说，翻译也得上心点，不要忘记翻「and」这种连接词，一看到这个词都没翻译，马上去搜原文，然后 bingo= =</p>
-<p>整本书到底有多少是原创内容就不说了。就是有些观点跟数据，我真希望他能附个链接说下来源。<br>他说 HWRendering 有限制，还列了几点。这个官方没提到过，网上搜了一下，找到了一篇 2011 年的文章，这个可信，应该也就是照着这说的。但是他说 HWRendering 有缺陷，还说某些情况下不刷新。然而没有代码，没有 demo，也没有来源，这我就非常怀疑了。这种问题起码会是个 issue 吧，可是我也搜不到。这是不是个脑补的缺陷。</p>
+<p>整本书到底有多少是原创内容就不说了。就是有些观点跟数据，我真希望他能附个链接说下来源。<br>他说 HWRendering 有限制，还列了几点。这个官方没提到过，网上搜了一下，找到了一篇 <a href="https://plus.google.com/+DianneHackborn/posts/2FXDCz8x93s" target="_blank" rel="external">2011 年的文章</a>，这个可信，应该也就是照着这说的。但是他说 HWRendering 有缺陷，还说某些情况下不刷新。然而没有代码，没有 demo，也没有来源，这我就非常怀疑了。这种问题起码会是个 issue 吧，可是我也搜不到。这是不是个脑补的缺陷。</p>
 <p>真庆幸这次买了电子版，不然我还得考虑怎么扔掉。<br>从15年到现在，国内出了不少 Android 相关的书了，但结果我能推荐的还是只有15年前看过的那几本。<br>而这还是一位十年总监写的优化书，再考虑之前某旅游应用总监写的某本书，我真的怀疑是不是因为国内有能力的人都不屑于写书。也确实，国内的书这么便宜，版税也收不了多少。可是还是希望哪天可以见到几本像样的 android 书啊（。</p>
 <p>看本书要这么较真也是久违了，上次还是照着原文吐槽的垃圾回收的算法与实现= =不过那次是吐槽翻译啊。</p>
 <h2 id="边看边整（tu）理（cao）的内容："><a href="#边看边整（tu）理（cao）的内容：" class="headerlink" title="边看边整（tu）理（cao）的内容："></a>边看边整（tu）理（cao）的内容：</h2><p>有种硬着头皮读下去的感觉，不知道的东西可以这么扯。5.6<br>按照章节的顺序写一下。</p>
@@ -340,18 +340,18 @@
 <ul>
 <li>「每个应用只对应一个 Application 对象」– 多进程情况下会有多个。后面说的不同 Activity 和 Service 获得的对象都是同一个对象同理。</li>
 <li>「…重写的 Application 类后，看看该类可以重载的抽象接口」–Application 不是抽象类，没有抽象接口。</li>
-<li>「onTerminate() 应用结束时调用」 – 这个方法只有模拟器会调到。</li>
+<li>「<code>onTerminate()</code> 应用结束时调用」 – 这个方法只有模拟器会调到。</li>
 </ul>
 <p>2.6.3</p>
 <ul>
-<li>讲 ListView 的局部刷新说 notisfyDataSetChanged() 是什么鬼。。只有 RecyclerView 可以做列表的局部刷新吧。<br>2.7.2</li>
+<li>讲 ListView 的局部刷新说 <code>notisfyDataSetChanged()</code> 是什么鬼。。只有 RecyclerView 可以做列表的局部刷新吧。<br>2.7.2</li>
 <li>「这时点击事件是绝对不会触发的」—这时你做了什么啊orz（在新位置点击控件）</li>
 </ul>
 <p>2.8.2 （卡顿检测）代码实现</p>
 <ul>
 <li>实现 UiPerfMonitorConfig 竟然只是为了里面的常量。。。还有里面的 public 修饰符也是多余的。为什么不要实现只有常量的接口：<a href="http://stackoverflow.com/questions/2659593/what-is-the-use-of-interface-constants" target="_blank" rel="external">constant interfaces</a>  （不过之前见过 JarkWharton 的代码也有定义常量接口这一习惯，确实没见过实现这种接口）</li>
 <li>这里就是把 BlockCanary 又重新造了一次轮子，而且应该说主要的代码都是一模一样的。唔，竟然没有出处说明 <a href="https://github.com/markzhai/AndroidPerformanceMonitor" target="_blank" rel="external">BlockCanary</a></li>
-<li>LogWriter.writeLog4SampleFile，从网上拷贝的代码注释没删掉（。</li>
+<li><code>LogWriter.writeLog4SampleFile()</code>，从网上拷贝的代码注释没删掉（。</li>
 </ul>
 <p><strong>表示他一说到垃圾回收我就懵逼（。我真的不知道有哪些是可以信的了。</strong><br>3.1.1 内存管理机制</p>
 <ul>
@@ -401,7 +401,7 @@
 <p>6.3 JobScheduler</p>
 <ul>
 <li>【出现了ThreadHandler= =还有其他很多奇怪的单词拼错了，是不是翻译的时候错了。</li>
-<li>这里说 JobSchedulerService 要实现两个方法，后面突然冒出个 jobFinished 这第三个方法也是神奇了= =</li>
+<li>这里说 JobSchedulerService 要实现两个方法，后面突然冒出个 <code>jobFinished()</code> 这第三个方法也是神奇了= =</li>
 <li>JobScheduler（6.3.3.1）不少内容来自于这里，照着翻译的（中文夹杂了个「and」，这是漏翻了吧：D）：<a href="https://code.tutsplus.com/tutorials/using-the-jobscheduler-api-on-android-lollipop--cms-23562" target="_blank" rel="external">JobScheduler</a> ，官方文档也有一部分（ThreadHandler 也是因为翻译的时候少了一个斜杆导致的吧：<a href="https://developer.android.com/reference/android/app/job/JobService.html" target="_blank" rel="external">JobService</a></li>
 </ul>
 <p>6.4 Doze</p>
