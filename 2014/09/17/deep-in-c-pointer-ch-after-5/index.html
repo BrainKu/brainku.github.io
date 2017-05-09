@@ -84,22 +84,17 @@
 
 
 
-<meta name="description" content="Chap 6 指针和结构体字节对齐结构体尤其要注意的问题是：字节对齐
-
-Data alignment means putting the data at a memory offset equal to some multiple of the word size, which increases the system’s performance due to the way the CPU ha">
+<meta name="description" content="Chap 6 指针和结构体字节对齐结构体尤其要注意的问题是：字节对齐  Data alignment means putting the data at a memory offset equal to some multiple of the word size, which increases the system’s performance due to the way the CPU ha">
+<meta name="keywords" content="笔记,读书">
 <meta property="og:type" content="article">
-<meta property="og:title" content="《深入理解C指针》 >= Ch6">
+<meta property="og:title" content="《深入理解C指针》 &gt;= Ch6">
 <meta property="og:url" content="https://brainku.github.io/2014/09/17/deep-in-c-pointer-ch-after-5/index.html">
 <meta property="og:site_name" content="Self Driven">
-<meta property="og:description" content="Chap 6 指针和结构体字节对齐结构体尤其要注意的问题是：字节对齐
-
-Data alignment means putting the data at a memory offset equal to some multiple of the word size, which increases the system’s performance due to the way the CPU ha">
+<meta property="og:description" content="Chap 6 指针和结构体字节对齐结构体尤其要注意的问题是：字节对齐  Data alignment means putting the data at a memory offset equal to some multiple of the word size, which increases the system’s performance due to the way the CPU ha">
 <meta property="og:updated_time" content="2016-08-20T12:42:13.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="《深入理解C指针》 >= Ch6">
-<meta name="twitter:description" content="Chap 6 指针和结构体字节对齐结构体尤其要注意的问题是：字节对齐
-
-Data alignment means putting the data at a memory offset equal to some multiple of the word size, which increases the system’s performance due to the way the CPU ha">
+<meta name="twitter:title" content="《深入理解C指针》 &gt;= Ch6">
+<meta name="twitter:description" content="Chap 6 指针和结构体字节对齐结构体尤其要注意的问题是：字节对齐  Data alignment means putting the data at a memory offset equal to some multiple of the word size, which increases the system’s performance due to the way the CPU ha">
 
 
 
@@ -336,8 +331,8 @@ Data alignment means putting the data at a memory offset equal to some multiple 
 <p>Data alignment means putting the data at a memory offset equal to some multiple of the word size, which increases the system’s performance due to the way the CPU handles memory –来自WIKI</p>
 </blockquote>
 <a id="more"></a>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 一定使用typedef才可以在后面sizeof中直接使用Node</span></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="number">_</span>node &#123;</div><div class="line">	<span class="keyword">char</span>* content;</div><div class="line">	<span class="keyword">char</span>* test;</div><div class="line">	<span class="keyword">int</span> value;</div><div class="line">	<span class="keyword">short</span> s1;</div><div class="line">	<span class="keyword">short</span> s2;</div><div class="line">&#125; Node;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, <span class="keyword">sizeof</span>(Node)); <span class="comment">// 24</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>在我64位的机器上输出是24。<del>我老是忘记只有指针的大小跟机器的位数有关- -。</del><br>两个 <code>char*</code> 16字节，<code>int</code> 4字节， 两个 <code>short</code> 4字节。去掉所有的short，也还是24字节。<br>实际上是按照结构体中最大的单元的n倍来分配空间的。<br>上面最大的<strong>结构单元</strong>是8字节的指针，那么结构体占有的空间只能是8的倍数。<br>如果一个结构体中包含另外一个结构体，那么最小的 <strong>结构单元</strong> 是另外一个结构体与当前结构体中合起来的所有成员中最占内存的单位（而不是把被包含的结构体作为一个单位）<br>再看一个对齐的例子：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> node &#123;</div><div class="line">	<span class="keyword">char</span> a[<span class="number">10</span>]; </div><div class="line">	<span class="keyword">int</span> value;</div><div class="line">	<span class="keyword">char</span> gender;</div><div class="line">&#125; Node; <span class="comment">//20</span></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> node &#123; </div><div class="line">	<span class="keyword">int</span> value;</div><div class="line">	<span class="keyword">char</span> gender;</div><div class="line">	<span class="keyword">char</span> a[<span class="number">10</span>];</div><div class="line">&#125; Node; <span class="comment">//16</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 一定使用typedef才可以在后面sizeof中直接使用Node</span></div><div class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">node</span> &#123;</span></div><div class="line">	<span class="keyword">char</span>* content;</div><div class="line">	<span class="keyword">char</span>* test;</div><div class="line">	<span class="keyword">int</span> value;</div><div class="line">	<span class="keyword">short</span> s1;</div><div class="line">	<span class="keyword">short</span> s2;</div><div class="line">&#125; Node;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, <span class="keyword">sizeof</span>(Node)); <span class="comment">// 24</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在我64位的机器上输出是24。<del>我老是忘记只有指针的大小跟机器的位数有关- -。</del><br>两个 <code>char*</code> 16字节，<code>int</code> 4字节， 两个 <code>short</code> 4字节。去掉所有的short，也还是24字节。<br>实际上是按照结构体中最大的单元的n倍来分配空间的。<br>上面最大的<strong>结构单元</strong>是8字节的指针，那么结构体占有的空间只能是8的倍数。<br>如果一个结构体中包含另外一个结构体，那么最小的 <strong>结构单元</strong> 是另外一个结构体与当前结构体中合起来的所有成员中最占内存的单位（而不是把被包含的结构体作为一个单位）<br>再看一个对齐的例子：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span> &#123;</span></div><div class="line">	<span class="keyword">char</span> a[<span class="number">10</span>]; </div><div class="line">	<span class="keyword">int</span> value;</div><div class="line">	<span class="keyword">char</span> gender;</div><div class="line">&#125; Node; <span class="comment">//20</span></div><div class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span> &#123;</span> </div><div class="line">	<span class="keyword">int</span> value;</div><div class="line">	<span class="keyword">char</span> gender;</div><div class="line">	<span class="keyword">char</span> a[<span class="number">10</span>];</div><div class="line">&#125; Node; <span class="comment">//16</span></div></pre></td></tr></table></figure></p>
 <p>输出都写在上面了。当把小单位的单元放在一起时不先考虑packed的问题，小的东西先挤挤看~后面那种情况可以挤一下，于是变成 <code>char[11]</code> 不到12字节，就填成12字节，最后也就形成了16字节的空间。<br>而上面那种情况，是由于int在中间隔断了两个char,导致虽然两个char相邻，但也只能被分别packed~最后就是20字节啦。</p>
 <h2 id="创建与释放"><a href="#创建与释放" class="headerlink" title="创建与释放"></a><strong>创建与释放</strong></h2><p>创建不提，结构体比较容易出现的问题是在释放的时候。经常会出现忘记释放分配的内存的情况，小心谨慎即可。</p>
 <p>关于结构体成员变量的访问，如果是结构体指针直接用 <code>-&gt;</code> 即可，如果是结构体的一个变量，就用点操作符。<br>为减少 <code>malloc</code> 和 <code>free</code> 的开销，可以适当地使用缓存池~<br>简单的思路就是：</p>
@@ -415,8 +410,8 @@ Data alignment means putting the data at a memory offset equal to some multiple 
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/05/07/read-android-performance-best-practice/" rel="prev" title="《Android应用性能优化最佳实践》个毛线">
-                《Android应用性能优化最佳实践》个毛线 <i class="fa fa-chevron-right"></i>
+              <a href="/2014/10/01/reading-android-develop-master/" rel="prev" title="小探Android应用层原理--《Android开发精要》">
+                小探Android应用层原理--《Android开发精要》 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -487,7 +482,7 @@ Data alignment means putting the data at a memory offset equal to some multiple 
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -496,7 +491,7 @@ Data alignment means putting the data at a memory offset equal to some multiple 
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -505,7 +500,7 @@ Data alignment means putting the data at a memory offset equal to some multiple 
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

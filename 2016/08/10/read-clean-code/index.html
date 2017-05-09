@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="读书,工程实践," />
 
 
 
@@ -84,18 +84,17 @@
 
 
 
-<meta name="description" content="之前在看“伪物语”的时候，看到墙上的某个时钟看起来特别精致，突然间就想做出来试试。可是就算看完了动画，我对如何画那个钟还是没有一点想法。">
+<meta name="description" content="前言无关的前言。六月时买的书，一直藏着没打算看。把深入理解 Android 卷III 翻完之后就决定把这本书翻了。">
+<meta name="keywords" content="读书,工程实践">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android draw text clock">
-<meta property="og:url" content="https://brainku.github.io/2014/08/27/android-draw-text_clock/index.html">
+<meta property="og:title" content="读《代码整洁之道》">
+<meta property="og:url" content="https://brainku.github.io/2016/08/10/read-clean-code/index.html">
 <meta property="og:site_name" content="Self Driven">
-<meta property="og:description" content="之前在看“伪物语”的时候，看到墙上的某个时钟看起来特别精致，突然间就想做出来试试。可是就算看完了动画，我对如何画那个钟还是没有一点想法。">
-<meta property="og:image" content="https://brainku.github.io/images/androi-text-clock/text_clock_dst.jpg">
-<meta property="og:updated_time" content="2016-08-20T13:25:33.000Z">
+<meta property="og:description" content="前言无关的前言。六月时买的书，一直藏着没打算看。把深入理解 Android 卷III 翻完之后就决定把这本书翻了。">
+<meta property="og:updated_time" content="2017-05-09T15:40:32.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android draw text clock">
-<meta name="twitter:description" content="之前在看“伪物语”的时候，看到墙上的某个时钟看起来特别精致，突然间就想做出来试试。可是就算看完了动画，我对如何画那个钟还是没有一点想法。">
-<meta name="twitter:image" content="https://brainku.github.io/images/androi-text-clock/text_clock_dst.jpg">
+<meta name="twitter:title" content="读《代码整洁之道》">
+<meta name="twitter:description" content="前言无关的前言。六月时买的书，一直藏着没打算看。把深入理解 Android 卷III 翻完之后就决定把这本书翻了。">
 
 
 
@@ -123,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://brainku.github.io/2014/08/27/android-draw-text_clock/"/>
+  <link rel="canonical" href="https://brainku.github.io/2016/08/10/read-clean-code/"/>
 
 
 
 
 
-  <title> Android draw text clock | Self Driven </title>
+  <title> 读《代码整洁之道》 | Self Driven </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -252,7 +251,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://brainku.github.io/2014/08/27/android-draw-text_clock/">
+  <link itemprop="mainEntityOfPage" href="https://brainku.github.io/2016/08/10/read-clean-code/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="苦辛味">
@@ -276,7 +275,7 @@
             
             
               
-                Android draw text clock
+                读《代码整洁之道》
               
             
           </h1>
@@ -291,8 +290,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-08-27T19:47:16+08:00">
-                2014-08-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-08-10T23:03:00+08:00">
+                2016-08-10
               </time>
             
 
@@ -314,8 +313,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/android-view/" itemprop="url" rel="index">
-                    <span itemprop="name">android view</span>
+                  <a href="/categories/读书/" itemprop="url" rel="index">
+                    <span itemprop="name">读书</span>
                   </a>
                 </span>
 
@@ -349,18 +348,29 @@
       
 
       
-        <p>之前在看“伪物语”的时候，看到墙上的某个时钟看起来特别精致，突然间就想做出来试试。可是就算看完了动画，我对如何画那个钟还是没有一点想法。<br><a id="more"></a></p>
-<p><img src="/images/androi-text-clock/text_clock_dst.jpg" alt=""><br>主要的难题就是黑白交界处文字的绘制:单个文字有部分是黑色的，有部分是白色的。<br>按照之前看到过的Titanic的思路，可以用BitmapShader来做。但是如果使用BitmapShader的话，又需要创建Bitmap，或者读取一个Bitmap。最最重要的是，如果是用BitmapShader来做的话，可定制性太差了。如果我想<strong>让字体黑色跟白色部分的跟着时针的转动一起变化</strong>呢？可以做到这样子吗？<br>关于这个问题，想了几天，在某天晚上突然想到了某种三层布局：1）背景色 2）中间可变化的半圆区域 3）透明的字体<br>一开始觉得终于找到解决方案了，可是后来越想越有问题。想了一天，感觉在这样子下去不行。<strong>打鸡血!</strong>先尝试再说。  </p>
-<h4 id="1-在12个顶点绘制字"><a href="#1-在12个顶点绘制字" class="headerlink" title="1. 在12个顶点绘制字"></a>1. 在12个顶点绘制字</h4><p>一开始有想过使用 <code>drawTextOnPath()</code> 的方法，但是绘制之后发现字体也会绕着Path旋转，另外字体间隔也不好控制，最终放弃了。还是老老实实地计算坐标了。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onSizeChanged</span><span class="params">()</span> </span>&#123;</div><div class="line">		...</div><div class="line">		<span class="keyword">float</span> sRadius = mRect.height() * <span class="number">0.4f</span>;</div><div class="line">		<span class="keyword">float</span> offset = mRect.height() * <span class="number">0.1f</span>;</div><div class="line">		mPointFs.clear();</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> angle = <span class="number">30</span>; angle &lt; <span class="number">390</span>; angle += <span class="number">30</span>) &#123;</div><div class="line">			<span class="keyword">float</span> x = sRadius * (<span class="number">1</span> + (<span class="keyword">float</span>) Math.sin(Math.toRadians(angle)));</div><div class="line">			<span class="keyword">float</span> y = sRadius * (<span class="number">1</span> - (<span class="keyword">float</span>) Math.cos(Math.toRadians(angle)));</div><div class="line">			mPointFs.add(<span class="keyword">new</span> PointF(offset + x, offset + y));</div><div class="line">		&#125;	</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>计算出坐标之后就不难做了，直接在canvas里面按照给定的字符串绘制字体就好了。但是有个问题要考虑，就是字体的宽度和高度。<br>绘制字体的时候是以左上角为起点的，如果没有进行计算字体的宽高进行绘制的话，字体的位置就无法居中在计算的点。<br>字体的宽高只能通过 <code>Paint.getTextBound()</code> 来获取，因为 <code>Paint.measureText()</code> 只能用来计算宽度。拿到宽高后，直接改坐标绘制：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">canvas.drawText(num, pos + i + offset, </div><div class="line">		pos + i + <span class="number">1</span> + offset, x, </div><div class="line">		y + mTextRect.height() * <span class="number">0.5f</span>, mTextPaint);</div></pre></td></tr></table></figure></p>
-<h4 id="2-绘制“拾壹”“拾贰”的竖直布局"><a href="#2-绘制“拾壹”“拾贰”的竖直布局" class="headerlink" title="2. 绘制“拾壹”“拾贰”的竖直布局"></a>2. 绘制“拾壹”“拾贰”的竖直布局</h4><p>之前使用纯数字的，所以没怎么注意。在写成文字之后，仔细看了下，发现11跟12对应的文字需要竖直排列。似乎竖直布局还是蛮麻烦的。<br>一开始还是想用path的方式来做，但是后来发现不行，文字会横着过来。而我需要的效果是一个字一个字地叠下来。<br>那么加个换行符号？还是不行，<code>Canvas.drawText()</code> 的时候是会把换行符给忽略的。后来在网上找了下，英文必须无果–因为他们没有这种需求。有的只有中国跟日本的那些竖排文字。</p>
-<h4 id="3-绘制半黑半白的字体"><a href="#3-绘制半黑半白的字体" class="headerlink" title="3. 绘制半黑半白的字体"></a>3. 绘制半黑半白的字体</h4><h5 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h5><ul>
-<li>Canvas的 <code>drawTextOnPath()</code> 方法不支持实时预览。</li>
-<li><code>drawTextOnPath()</code> 会将文字自动旋转，相当于绘制文字的时候已经旋转了画布</li>
-<li>Paint的两个绘制文字的方法 <code>measureText()</code> 和 <code>getTextBound()</code> 在底层做的事情是一样的。唯一的区别是前者返回来的是 <code>float</code> 而后者返回的是 <code>int</code>， 而且是宽高都有。 </li>
-</ul>
-<h5 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h5><p>我的git又遇到问题了，一直提示unpack error，看下出错记录，发现是Author的名字出错了“=BrainKu <a href="&#x6d;&#97;&#x69;&#x6c;&#116;&#x6f;&#58;&#60;&#x6b;&#x75;&#120;&#x69;&#110;&#x77;&#101;&#105;&#64;&#49;&#x36;&#51;&#x2e;&#x63;&#111;&#109;">&#60;&#x6b;&#x75;&#120;&#x69;&#110;&#x77;&#101;&#105;&#64;&#49;&#x36;&#51;&#x2e;&#x63;&#111;&#109;</a>“。这是什么啊= =<br>最后是用rebase来解决问题了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git rebase -i -p HEAD (before the commit you want to change)</div><div class="line">git commit --amend --author &quot;BrainKu &lt;kuxinwei@163.com&gt;&quot;</div><div class="line">git rebase --continue</div></pre></td></tr></table></figure></p>
-<p>参考资料<br>[git change commit author]</p>
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>无关的前言。六月时买的书，一直藏着没打算看。把深入理解 Android 卷III 翻完之后就决定把这本书翻了。</p>
+<a id="more"></a>
+<h3 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h3><p>作为一本指导类型的书，这本书讲了从变量名一直到多线程同步编程，系统设计，涵盖了各种细节到大观。  </p>
+<p>说结论，我个人并不是很喜欢这本书。相较于程序员修炼之道，这本书有大量主观的说法。  </p>
+<hr>
+<p>关于命名，我非常赞同作者的说法。在项目里我见过太多名字被起得莫名其妙的类，域名，方法。这些类根本让人无法搜索，只能通过入口去一层一层深入。这真的是一件让人很恼火的事。<br>作者也把匈牙利命名法批判了一番，这种前缀毫无意义。前缀跟后缀应该使用来表示 Context，而非用于标记这是一个变量或者其他。</p>
+<hr>
+<p>关于方法，我赞同有些方法应该尽可能地短，函数名应该尽可能表达其含义。但我在书里所看到的是，不少是支离破碎的细节。确实，尽可能地提取了函数之后，逻辑上会更加清晰，但跳转逻辑太多也会让人恼火。我更习惯于在逻辑快变得复杂时，将这一部分单独提取出来。把每个 if 语句的判断逻辑都写成一个函数，我应该也没有这种重构的时间。<br>另外，作者偶尔也会自我矛盾。有时候他提取了小逻辑，有时候他又说这没必要。这其中并没有一个标准。  </p>
+<hr>
+<p>关于注释，「注释最多只是一种必须的恶」。因为你没法用你的函数名清楚地告诉调用者使用之后会发生什么事，所以你要说明。<br>作者提到的是否需要注释的部分，有些只能算是说说罢了。比如说，公共使用的 API 需要注释。你并没法保证你做的这个模块是否会成为公共模块，所以你到底要不要写注释呢？<br>关于糟糕的注释也是，修炼之道告诉你，你要署名，因为这代表是你所完成的，代表你对这份代码负责。这本书告诉你：署名？丢掉吧，版本控制系统会告诉你。但我个人倾向于修炼之道的做法。   </p>
+<hr>
+<p>「<strong>一组开发者应当认同同一种格式风格，每个成员都应该采用那种风格。</strong>」这句话真的是戳到了我的痛点，我在跟一群完全不在乎这种事的人共事着。连格式都不在乎，他们怎能写出让人愉快的代码？</p>
+<hr>
+<p>书里关于异常处理的代码，确实是让我看到异常的另外一种处理方法。将内部抛出的各类异常包裹成自己的异常，使内部的代码尽可能地简洁，即 try 块中只有正常执行的代码。这种代码看起来真的蛮舒服的，值得一试。</p>
+<hr>
+<p>这本书后半很大一部分的内容都是作者在教你怎么把一段看起来不怎么「优雅」的代码改成<strong>他想要的样子</strong>。书的最后更是贴了六十几页的代码来举一个完整的例子。<br>可是我在他改的过程中所看到很多是作者自己主观的想法。一个函数到底多短才可以？这真的不只是越短越好。hot point 的话，方法内联也是必须的。如果你知道一个函数会把大量调用，适当减少调用层次会帮你不少忙。另外，时间跟效率的平衡也是值得考虑的一件事。我真没空把函数拆得支离破碎，在保证「一定」整洁性的前提下，我得去干其他事。</p>
+<hr>
+<p>书里提到的大量重构的内容，我觉得我大概怎么都做不了吧。Android 真不是一个希望你能给你的应用写测试的平台。</p>
+<h3 id="另外一件事"><a href="#另外一件事" class="headerlink" title="另外一件事"></a>另外一件事</h3><p>这是一部译著，这本书需要评论还有它的翻译。<br>我想，如果当初我是在实体书店翻过这本书的话，我是一定不会买的吧。这个翻译翻出来的文字读起来让人特别纠结，文诌诌的（比如把依赖翻成依恋），完全没有作者在某些地方表现出来的幽默感。最可怕的是，这个译者有些专业术语更是不可原谅地翻错了。explaining temporary variables - 解释临时变量模式？what？具有解释性的临时变量多正常。把 decorator 翻成油漆工？把 collection 翻成集群类？真怀疑译者到底有没有起码看过一本设计模式书籍或者Java入门书。</p>
+<h3 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h3><p>如果要给这本书一个评分的吧，就像我在豆瓣上给的，原书4分，翻译2分。这个翻译太糟糕，列入黑名单。<br>在豆瓣上给的评价：</p>
+<blockquote>
+<p>「4分给原作，翻译2分。整本书看起来极其费力。译者好像在追求着用语的与众不同，比如把依赖翻成依恋？译者的辞藻是不是用错地方了。看霍炬翻的重构我都没有这种感觉，人家是翻得是真有文采跟幽默感。这本书最糟糕的是把一些专业术语翻得莫名其妙，把装饰器翻成油漆工？集合类翻成集群类。任何一个看过设计模式跟Java入门书的人都不会这么翻。」</p>
+</blockquote>
 
       
     </div>
@@ -382,13 +392,21 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/读书/" rel="tag"># 读书</a>
+          
+            <a href="/tags/工程实践/" rel="tag"># 工程实践</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2014/08/24/da-ji-xue/" rel="next" title="打鸡血=。=">
-                <i class="fa fa-chevron-left"></i> 打鸡血=。=
+              <a href="/2014/10/14/learn-python-in-a-quick-way/" rel="next" title="Python的快速入门--《A Byte of Python》">
+                <i class="fa fa-chevron-left"></i> Python的快速入门--《A Byte of Python》
               </a>
             
           </div>
@@ -397,8 +415,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2014/09/15/deep-in-c-pointer-ch-1-2/" rel="prev" title="《深入理解C指针》 Chap1&2">
-                《深入理解C指针》 Chap1&2 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/05/07/read-android-performance-best-practice/" rel="prev" title="《Android应用性能优化最佳实践》个毛线">
+                《Android应用性能优化最佳实践》个毛线 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -469,7 +487,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -478,7 +496,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -487,7 +505,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -522,7 +540,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-在12个顶点绘制字"><span class="nav-number">1.</span> <span class="nav-text">1. 在12个顶点绘制字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-绘制“拾壹”“拾贰”的竖直布局"><span class="nav-number">2.</span> <span class="nav-text">2. 绘制“拾壹”“拾贰”的竖直布局</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-绘制半黑半白的字体"><span class="nav-number">3.</span> <span class="nav-text">3. 绘制半黑半白的字体</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#注意："><span class="nav-number">3.1.</span> <span class="nav-text">注意：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#遇到的问题"><span class="nav-number">3.2.</span> <span class="nav-text">遇到的问题</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正文"><span class="nav-number">2.</span> <span class="nav-text">正文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#另外一件事"><span class="nav-number">3.</span> <span class="nav-text">另外一件事</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#まとめ"><span class="nav-number">4.</span> <span class="nav-text">まとめ</span></a></li></ol></div>
             
 
           </div>
