@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Self Driven</title>
+  <subtitle>兴趣是1，坚持是剩下的99</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://brainku.github.io/"/>
+  <updated>2017-05-14T06:30:14.000Z</updated>
+  <id>https://brainku.github.io/</id>
+  
+  <author>
+    <name>苦辛味</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>迟到的 N2 总结</title>
+    <link href="https://brainku.github.io/2017/05/14/way-to-learn-japanese/"/>
+    <id>https://brainku.github.io/2017/05/14/way-to-learn-japanese/</id>
+    <published>2017-05-14T06:25:33.000Z</published>
+    <updated>2017-05-14T06:30:14.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;正文&quot;&gt;&lt;a href=&quot;#正文&quot; class=&quot;headerlink&quot; title=&quot;正文&quot;&gt;&lt;/a&gt;正文&lt;/h3&gt;&lt;p&gt;最近翻了一本《双语者》的小书，想起了我考完 N2 之后还没写过总结，所以趁着这个机会，把之前的都补上来。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="外语" scheme="https://brainku.github.io/categories/%E5%A4%96%E8%AF%AD/"/>
+    
+    
+      <category term="自学" scheme="https://brainku.github.io/tags/%E8%87%AA%E5%AD%A6/"/>
+    
+      <category term="日语" scheme="https://brainku.github.io/tags/%E6%97%A5%E8%AF%AD/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>《Android应用性能优化最佳实践》个毛线</title>
+    <link href="https://brainku.github.io/2017/05/07/read-android-performance-best-practice/"/>
+    <id>https://brainku.github.io/2017/05/07/read-android-performance-best-practice/</id>
+    <published>2017-05-07T03:56:19.000Z</published>
+    <updated>2017-05-11T00:31:01.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;正文&quot;&gt;&lt;a href=&quot;#正文&quot; class=&quot;headerlink&quot; title=&quot;正文&quot;&gt;&lt;/a&gt;正文&lt;/h2&gt;&lt;p&gt;有好长一段时间没留意过（快有一年了说不定）市面上 Android 相关的开发书籍了。前几天面试完的时候领导突然让我给他推荐几本 android 开发相关的「好书」，我才又去亚马逊翻了一下排行榜。&lt;br&gt;《Android应用性能优化最佳实践》这本书给我留下了一点印象，作者好像很厉害，T家音乐的十年总监，评价也都是五星。唔，看起来不错，只是没看过不好评价。晚上写清单给领导的时候他竟然刚好也提到了这本书，这么多人推荐，大概不是雷，速度买了电子版晚上回去看。&lt;/p&gt;
+&lt;p&gt;结果还是踩到雷了= =&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="读书" scheme="https://brainku.github.io/categories/%E8%AF%BB%E4%B9%A6/"/>
+    
+    
+      <category term="读书" scheme="https://brainku.github.io/tags/%E8%AF%BB%E4%B9%A6/"/>
+    
+      <category term="android" scheme="https://brainku.github.io/tags/android/"/>
+    
+      <category term="吐槽" scheme="https://brainku.github.io/tags/%E5%90%90%E6%A7%BD/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>读《代码整洁之道》</title>
+    <link href="https://brainku.github.io/2016/08/10/read-clean-code/"/>
+    <id>https://brainku.github.io/2016/08/10/read-clean-code/</id>
+    <published>2016-08-10T15:03:00.000Z</published>
+    <updated>2017-05-09T15:40:32.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;无关的前言。六月时买的书，一直藏着没打算看。把深入理解 Android 卷III 翻完之后就决定把这本书翻了。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="读书" scheme="https://brainku.github.io/categories/%E8%AF%BB%E4%B9%A6/"/>
+    
+    
+      <category term="读书" scheme="https://brainku.github.io/tags/%E8%AF%BB%E4%B9%A6/"/>
+    
+      <category term="工程实践" scheme="https://brainku.github.io/tags/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python的快速入门--《A Byte of Python》</title>
+    <link href="https://brainku.github.io/2014/10/14/learn-python-in-a-quick-way/"/>
+    <id>https://brainku.github.io/2014/10/14/learn-python-in-a-quick-way/</id>
+    <published>2014-10-14T06:57:46.000Z</published>
+    <updated>2016-08-20T12:42:13.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;正文&quot;&gt;&lt;a href=&quot;#正文&quot; class=&quot;headerlink&quot; title=&quot;正文&quot;&gt;&lt;/a&gt;正文&lt;/h2&gt;&lt;h3 id=&quot;内容简介&quot;&gt;&lt;a href=&quot;#内容简介&quot; class=&quot;headerlink&quot; title=&quot;内容简介&quot;&gt;&lt;/a&gt;内容简介&lt;/h3&gt;&lt;p&gt;虽然这本书说适合没有太多编程基础的人，但我这篇总结是为具有一定编程基础的人所准备的- -&lt;br&gt;书中一开始先简单介绍了python的一些基本语法规则，标识符，接着按章节以‘&lt;strong&gt;操作符与表达式&lt;/strong&gt;’，‘&lt;strong&gt;控制流&lt;/strong&gt;’，‘&lt;strong&gt;函数&lt;/strong&gt;’，‘&lt;strong&gt;模块&lt;/strong&gt;’，‘&lt;strong&gt;数据结构&lt;/strong&gt;’，‘&lt;strong&gt;OOP&lt;/strong&gt;’，‘&lt;strong&gt;输入和输出&lt;/strong&gt;’，‘&lt;strong&gt;异常&lt;/strong&gt;’及‘&lt;strong&gt;其他拓展&lt;/strong&gt;’的顺序较为完整地介绍了python的主要内容。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="读书" scheme="https://brainku.github.io/categories/%E8%AF%BB%E4%B9%A6/"/>
+    
+    
+      <category term="笔记" scheme="https://brainku.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="问题" scheme="https://brainku.github.io/tags/%E9%97%AE%E9%A2%98/"/>
+    
+      <category term="python" scheme="https://brainku.github.io/tags/python/"/>
+    
+      <category term="入门" scheme="https://brainku.github.io/tags/%E5%85%A5%E9%97%A8/"/>
+    
+      <category term="我的思考" scheme="https://brainku.github.io/tags/%E6%88%91%E7%9A%84%E6%80%9D%E8%80%83/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>关于onSaveInstanceState的那点事</title>
+    <link href="https://brainku.github.io/2014/10/07/something-about-onsaveinstancestate/"/>
+    <id>https://brainku.github.io/2014/10/07/something-about-onsaveinstancestate/</id>
+    <published>2014-10-07T11:52:21.000Z</published>
+    <updated>2017-05-09T23:38:51.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;之前对这个函数功能不是太了解，在&lt;a href=&quot;https://brainku.github.io/2014/10/01/reading-android-develop-master/&quot;&gt;阅读《Android开发精要》&lt;/a&gt;这本书的过程中发现关于这个函数的描述存在矛盾。这个在Activity的生命周期中可能涉及到的函数做了什么，又是怎么做的，又有什么需要注意的，不弄懂的话说不过去~&lt;br&gt;
+    
+    </summary>
+    
+      <category term="android" scheme="https://brainku.github.io/categories/android/"/>
+    
+    
+      <category term="android" scheme="https://brainku.github.io/tags/android/"/>
+    
+      <category term="源码" scheme="https://brainku.github.io/tags/%E6%BA%90%E7%A0%81/"/>
+    
+      <category term="持久化" scheme="https://brainku.github.io/tags/%E6%8C%81%E4%B9%85%E5%8C%96/"/>
+    
+      <category term="问题" scheme="https://brainku.github.io/tags/%E9%97%AE%E9%A2%98/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>小探Android应用层原理--《Android开发精要》</title>
+    <link href="https://brainku.github.io/2014/10/01/reading-android-develop-master/"/>
+    <id>https://brainku.github.io/2014/10/01/reading-android-develop-master/</id>
+    <published>2014-10-01T02:03:34.000Z</published>
+    <updated>2017-05-09T15:38:38.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;之前是翻过了一遍，只是没做总结的话似乎没什么印象。接下来就简要地总结一下书上提到的内容【估计也不简要-我做笔记总是会太注重细节】。内容会按照章节来做总结，不再细分小点。存在拓展性内容的话会重点描述，如果是官方的资料，那这里只会给出相应的链接。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="读书" scheme="https://brainku.github.io/categories/%E8%AF%BB%E4%B9%A6/"/>
+    
+    
+      <category term="笔记" scheme="https://brainku.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="读书" scheme="https://brainku.github.io/tags/%E8%AF%BB%E4%B9%A6/"/>
+    
+      <category term="android" scheme="https://brainku.github.io/tags/android/"/>
+    
+      <category term="疑问" scheme="https://brainku.github.io/tags/%E7%96%91%E9%97%AE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>《深入理解C指针》 &gt;= Ch6</title>
+    <link href="https://brainku.github.io/2014/09/17/deep-in-c-pointer-ch-after-5/"/>
+    <id>https://brainku.github.io/2014/09/17/deep-in-c-pointer-ch-after-5/</id>
+    <published>2014-09-17T15:34:46.000Z</published>
+    <updated>2016-08-20T12:42:13.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Chap-6-指针和结构体&quot;&gt;&lt;a href=&quot;#Chap-6-指针和结构体&quot; class=&quot;headerlink&quot; title=&quot;Chap 6 指针和结构体&quot;&gt;&lt;/a&gt;Chap 6 指针和结构体&lt;/h1&gt;&lt;h2 id=&quot;字节对齐&quot;&gt;&lt;a href=&quot;#字节对齐&quot; class=&quot;headerlink&quot; title=&quot;字节对齐&quot;&gt;&lt;/a&gt;&lt;strong&gt;字节对齐&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;结构体尤其要注意的问题是：&lt;strong&gt;字节对齐&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Data alignment means putting the data at a memory offset equal to some multiple of the word size, which increases the system’s performance due to the way the CPU handles memory –来自WIKI&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+    
+      <category term="笔记" scheme="https://brainku.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="读书" scheme="https://brainku.github.io/tags/%E8%AF%BB%E4%B9%A6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>《深入理解C指针》 Ch5</title>
+    <link href="https://brainku.github.io/2014/09/17/deep-in-c-pointer-ch-5/"/>
+    <id>https://brainku.github.io/2014/09/17/deep-in-c-pointer-ch-5/</id>
+    <published>2014-09-17T12:34:31.000Z</published>
+    <updated>2016-08-20T13:06:51.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Chap5-指针和字符串&quot;&gt;&lt;a href=&quot;#Chap5-指针和字符串&quot; class=&quot;headerlink&quot; title=&quot;Chap5 指针和字符串&quot;&gt;&lt;/a&gt;Chap5 指针和字符串&lt;/h1&gt;&lt;h2 id=&quot;5-1-基础&quot;&gt;&lt;a href=&quot;#5-1-基础&quot; class=&quot;headerlink&quot; title=&quot;5.1 基础&quot;&gt;&lt;/a&gt;&lt;strong&gt;5.1 基础&lt;/strong&gt;&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;字符常量时单引号引起来的字符序列。字符常量通常由一个字符组成，也可包含多个字符（如转义）。在C中，字符常量是&lt;strong&gt;int类型&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;声明字符串的方式有三种: 字面量，字符数组，字符指针。&lt;br&gt;字符串字面量是用双引号包裹的字符序列，它位于字符串字面量池中。&lt;br&gt;&lt;strong&gt;！&lt;/strong&gt;跟单引号的字符字面量不同&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="笔记" scheme="https://brainku.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="读书" scheme="https://brainku.github.io/tags/%E8%AF%BB%E4%B9%A6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>《深入理解C指针》 Chap1&amp;2</title>
+    <link href="https://brainku.github.io/2014/09/15/deep-in-c-pointer-ch-1-2/"/>
+    <id>https://brainku.github.io/2014/09/15/deep-in-c-pointer-ch-1-2/</id>
+    <published>2014-09-15T10:34:02.000Z</published>
+    <updated>2016-08-20T12:42:13.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Chap-1-认识指针&quot;&gt;&lt;a href=&quot;#Chap-1-认识指针&quot; class=&quot;headerlink&quot; title=&quot;Chap 1 认识指针&quot;&gt;&lt;/a&gt;Chap 1 认识指针&lt;/h1&gt;&lt;h2 id=&quot;1-1-指针与内存&quot;&gt;&lt;a href=&quot;#1-1-指针与内存&quot; class=&quot;headerlink&quot; title=&quot;1.1 指针与内存&quot;&gt;&lt;/a&gt;1.1 指针与内存&lt;/h2&gt;&lt;p&gt;C使用内存的方式有三种：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;静态/全局内存&lt;br&gt; 变量在程序开始时分配,知道程序终止时被清除. 全局变量均可访问,静态变量则只在函数定义域内可以.&lt;/li&gt;
+&lt;li&gt;自动内存&lt;br&gt; 在函数内部声明,且在函数被调用时才创建.仅限函数调用期间可使用和生存.&lt;/li&gt;
+&lt;li&gt;动态内存&lt;br&gt; 分配在堆上的内存.可以根据需要来分配和释放.&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+    
+      <category term="笔记" scheme="https://brainku.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="读书" scheme="https://brainku.github.io/tags/%E8%AF%BB%E4%B9%A6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>打鸡血=。=</title>
+    <link href="https://brainku.github.io/2014/08/24/da-ji-xue/"/>
+    <id>https://brainku.github.io/2014/08/24/da-ji-xue/</id>
+    <published>2014-08-23T18:14:00.000Z</published>
+    <updated>2016-08-20T13:06:30.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;绝大多数时候，凑合着做完，比完美地半途而废要好。&lt;br&gt;绝大多数时候，决定要做就直接开始，比自认为准备充分了再开始要好。&lt;/p&gt;
+&lt;p&gt;脑内山水千万里，不如脚下一步。哪怕是跌出去的一步。&lt;/p&gt;
+&lt;p&gt;这个思维方式是我花了很长时间很大精力去养成的，至今都没有完全贯彻到行动中去，但多少有点进步。如果能真正实行，拖延症估计就好了吧。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>搭好了，我的github博客</title>
+    <link href="https://brainku.github.io/2014/08/23/first-try-to-jekyll/"/>
+    <id>https://brainku.github.io/2014/08/23/first-try-to-jekyll/</id>
+    <published>2014-08-23T09:14:00.000Z</published>
+    <updated>2016-08-20T12:42:13.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;折腾了一个下午之后终于把本地的Jekyll环境搭好并且运行起来了，可喜可贺。&lt;br&gt;说到我为什么要建博客，大概是因为一直没找到一个&lt;em&gt;省钱&lt;/em&gt;又省心的环境来写些记录吧。最近又开始在想，虽然我一直都有在记录思维导图，但是思维导图也是有些碎片化了吧。没有好好整理自己的想法的话，会像是在重造轮子。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="博客" scheme="https://brainku.github.io/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+  </entry>
+  
+</feed>
