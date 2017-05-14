@@ -91,7 +91,7 @@
 <meta property="og:url" content="https://brainku.github.io/2017/05/07/read-android-performance-best-practice/index.html">
 <meta property="og:site_name" content="Self Driven">
 <meta property="og:description" content="正文有好长一段时间没留意过（快有一年了说不定）市面上 Android 相关的开发书籍了。前几天面试完的时候领导突然让我给他推荐几本 android 开发相关的「好书」，我才又去亚马逊翻了一下排行榜。《Android应用性能优化最佳实践》这本书给我留下了一点印象，作者好像很厉害，T家音乐的十年总监，评价也都是五星。唔，看起来不错，只是没看过不好评价。晚上写清单给领导的时候他竟然刚好也提到了这本书，这">
-<meta property="og:updated_time" content="2017-05-09T15:40:28.000Z">
+<meta property="og:updated_time" content="2017-05-11T00:31:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Android应用性能优化最佳实践》个毛线">
 <meta name="twitter:description" content="正文有好长一段时间没留意过（快有一年了说不定）市面上 Android 相关的开发书籍了。前几天面试完的时候领导突然让我给他推荐几本 android 开发相关的「好书」，我才又去亚马逊翻了一下排行榜。《Android应用性能优化最佳实践》这本书给我留下了一点印象，作者好像很厉害，T家音乐的十年总监，评价也都是五星。唔，看起来不错，只是没看过不好评价。晚上写清单给领导的时候他竟然刚好也提到了这本书，这">
@@ -384,7 +384,7 @@
 <p>3.1.3 内存回收机制</p>
 <ul>
 <li>Android 的堆分代是这样子的？真希望他给个地址参考下，书里给的图片是 Hotspot JVM 的分代模型：<a href="http://www.oracle.com/webfolder/technetwork/tutorials/obe/java/gc01/index.html" target="_blank" rel="external">java gc</a></li>
-<li>「Stop World是由于并发GC时，其他线程都会停止」。首先，这里是「stop the world」，其次，STW是因为要标记从GC Root出来的对象，跟并不并发没关系。或者说并发就是尽量减少STW，跟 allocation 同时进行才叫并发。</li>
+<li>「Stop World是由于并发GC时，其他线程都会停止」。首先，这里是「stop the world」，然后这里是「并行」，并行跟并发并不一样。其次，STW是因为要标记从GC Root出来的对象，跟并不并行没关系。或者说并发就是尽量减少STW，跟 allocation 同时进行才叫并发。</li>
 </ul>
 <p>3.1.4 GC类型</p>
 <ul>
@@ -444,6 +444,10 @@
 <li>修正 PhoneState 内存泄漏的说明。</li>
 <li>修正 mark-copy 的说法。copy 算法是将存活对象直接拷贝到另外分区（就是Survivor）的做法，不需要标记。</li>
 </ul>
+<p>17.5.11</p>
+<ul>
+<li>修正「并发GC」这种说法。这是不存在的= =</li>
+</ul>
 
       
     </div>
@@ -489,6 +493,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/14/way-to-learn-japanese/" rel="prev" title="迟到的 N2 总结">
+                迟到的 N2 总结 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -558,7 +566,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -567,7 +575,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -576,7 +584,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
