@@ -188,6 +188,151 @@
   </entry>
   
   <entry>
+    <title>《调试九法：软硬件错误的排查之道》</title>
+    <link href="https://brainku.github.io/2016/12/11/debugging-the-9-rules/"/>
+    <id>https://brainku.github.io/2016/12/11/debugging-the-9-rules/</id>
+    <published>2016-12-11T00:25:14.000Z</published>
+    <updated>2017-05-15T05:41:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h3><blockquote>
+<p>当你发现你在随便改东西的时候，你要注意你又是在「猜测」而不是「观察」。 </p>
+</blockquote>
+<a id="more"></a>
+<h4 id="1-简介"><a href="#1-简介" class="headerlink" title="1 简介"></a>1 简介</h4><ul>
+<li>如果找一个 bug 花费了大量的时间，那有可能是忽略了某个最基本的、最重要的规则。</li>
+<li>下述提到的规则都是你要「记住并应用」的。</li>
+<li>这本书始终围绕着「查找 bug 的根源并修复」这个重点。</li>
+</ul>
+<h4 id="2-总体规则"><a href="#2-总体规则" class="headerlink" title="2 总体规则"></a>2 总体规则</h4><ul>
+<li>就是 3-11 这几个小点。</li>
+</ul>
+<h4 id="3-理解系统"><a href="#3-理解系统" class="headerlink" title="3 理解系统"></a>3 理解系统</h4><ul>
+<li>阅读手册—仔细阅读每个细节。出现问题的时候，重新回来查阅，几乎没人能仅靠一次阅读就记住所有细节。</li>
+<li>掌握基础知识：只有知道什么是正常的才能区分不正常。</li>
+<li>了解工作流程、原理和你使用的工具。如果你没有理解系统中的某个部分，那么这通常就是出问题的地方。</li>
+</ul>
+<h4 id="4-制造失败"><a href="#4-制造失败" class="headerlink" title="4 制造失败"></a>4 制造失败</h4><ul>
+<li>制造失败，试着让它再次发生。理由：a 观察 b 查找线索 c 确认是否修复。引发失败的时候，使这个过程自动化会非常有帮助。</li>
+<li>不要模拟失败：两者使用了不同的环境，可能错误的方式都不一样。</li>
+<li>对于间歇性失败，查找不受你控制的条件，记录它，找到它的特征。</li>
+<li>如果 bug 发生了，那就没有「不可能」，因为它就是出现了。别怀疑「另一种口味的冰淇淋」就是原因。</li>
+<li>别丢掉你的调试工具：你为了解决问题造出来的轮子哪天会再派上用场也不定。</li>
+</ul>
+<h4 id="5-不要想，而要看"><a href="#5-不要想，而要看" class="headerlink" title="5 不要想，而要看"></a>5 不要想，而要看</h4><ul>
+<li>观察失败，查看细节：直到你能确定错误的大致可能。猜测只为确定观察的重点。</li>
+<li>利用各种工具提供「观察」足够的信息————同时注意工具的影响。</li>
+</ul>
+<h4 id="6-分而治之"><a href="#6-分而治之" class="headerlink" title="6 分而治之"></a>6 分而治之</h4><ul>
+<li>逐次逼近缩小范围，这需要具备的两个条件：1. 确定范围  2. 确定问题出在哪一侧，从这一侧开始</li>
+<li>使用易于观察的输入或输出（测试模式）</li>
+<li>修复已知bug（bug间会相互吸引），排除噪音干扰（调试不是你该重构的时候！）</li>
+</ul>
+<h4 id="7-一次只改一个地方"><a href="#7-一次只改一个地方" class="headerlink" title="7 一次只改一个地方"></a>7 一次只改一个地方</h4><ul>
+<li>控制变量，一次只改一个地方，如果没修复，先还原。</li>
+<li>在知道发生什么之前先握住黄铜杆，别乱动系统。【我总是忍不住猜测，修改，编译代码，这也许才是最费时的。</li>
+<li>找到出问题前的最后一个版本，确定这之后修改了什么。</li>
+</ul>
+<h4 id="8-保持审计跟踪"><a href="#8-保持审计跟踪" class="headerlink" title="8 保持审计跟踪"></a>8 保持审计跟踪</h4><ul>
+<li>记录你的操作、操作顺序和结果记录下来。关联几个维度上的事件，哪个事件的哪个行为持续了多久。</li>
+<li>注意「任何」细节（或者说像是「格子衬衫」这样的共同的细节）</li>
+<li>充分利用版本控制系统。</li>
+<li>如果你知道会有什么问题，事先就加上注释解释下。这对你跟后来的维护者都好。</li>
+</ul>
+<h4 id="9-检查插头"><a href="#9-检查插头" class="headerlink" title="9 检查插头"></a>9 检查插头</h4><ul>
+<li>质疑你的假设（深信不疑是真理的可怕敌人，甚至比谎言更为可怕），当你排除了所有的不可能，剩下就是原因。<ul>
+<li>运行不正确的时候，你得先怀疑你的修改生效了吗。</li>
+</ul>
+</li>
+<li>从头开始：系统是不是从第一步开始按照预定的顺序执行了</li>
+<li>怀疑你的工具：想起了可爱的 AS，这个经常坑人的工具，InstantRun 刚出来就满满的一堆坑。</li>
+</ul>
+<h4 id="10-获得全新观点"><a href="#10-获得全新观点" class="headerlink" title="10 获得全新观点"></a>10 获得全新观点</h4><ul>
+<li>放下面子，征求别人的意见，听取别人的经验。（你的目标是什么？解决问题才是你最该关心的事）</li>
+<li>对于非自己的专业领域，从专业人士获取意见更快。</li>
+<li>总是描述症状而不是你的理论，别人对你的询问也同理。任何确定可疑的地方都可以提出来（就算是格子衬衫） </li>
+</ul>
+<h4 id="11-如果你不修复-bug，它将依然存在"><a href="#11-如果你不修复-bug，它将依然存在" class="headerlink" title="11 如果你不修复 bug，它将依然存在"></a>11 如果你不修复 bug，它将依然存在</h4><ul>
+<li>查证是「你的方案」确实修复了问题：去掉你的方案是否能够复现问题？</li>
+<li>bug 从不会消失，你能做的是在 bug 发生的时候记录足够的信息来让你复现：<ul>
+<li>想到最新的免费票活动，有些人总会发送失败，我加了两次失败的日志。第一次是只加了本地的日志记录，没有写入文件。第二次是加了日志，但日志信息并不足够详细，我根本没法根据这些信息复现场景。</li>
+</ul>
+</li>
+<li>不要只对结果进行修复，修复整个过程，或者说要从根本上解决问题。</li>
+</ul>
+<h4 id="12-一个案例"><a href="#12-一个案例" class="headerlink" title="12 一个案例"></a>12 一个案例</h4><ul>
+<li>通过一个案例讲述所有规则（偏向硬件，但涉及到了上述的这些规则）</li>
+</ul>
+<h4 id="13-牛刀小试"><a href="#13-牛刀小试" class="headerlink" title="13 牛刀小试"></a>13 牛刀小试</h4><ul>
+<li>有个地方很有趣：两条线路，第一条「看起来」正常，第二条一直异常。在修复了第二条的问题之后，将类似的结论运用到第一条之后，会发现它不应该正常。把第一条线路检查之后才发现某些情况它才能正常。—这种「原本正常」的异常，我是不是在哪里遇到过？</li>
+</ul>
+<h4 id="14-帮助台"><a href="#14-帮助台" class="headerlink" title="14 帮助台"></a>14 帮助台</h4><ul>
+<li>说到帮助台，一般都会认为是「远程支持」，「技术服务」这类工作才会遇到的场景，直到我想起了之前同事跟其他部门联调 SDK 时的事。只能在popo交流，只能通过发送特殊版本的插桩包进行日志的记录。所以这一章节可以在有真正遇到的时候再找来翻翻。</li>
+<li>为维修记录提供数据库—这个感觉不错，即时不用于查询，平时翻阅一下也不错，防止和其他人一样犯同样的错误。</li>
+<li>遵循规则，对行动和结果进行确认—即使是最简单的假设也得确认。</li>
+<li>使用自动工具，使用可用的故障维修指南—可以的话并试着完善。</li>
+</ul>
+<h3 id="摘抄"><a href="#摘抄" class="headerlink" title="摘抄"></a>摘抄</h3><blockquote>
+<p>如果查找一个bug花费了大量时间，那么原因可能是忽略了某个最基本的、最重要的规则。关键是记住并应用这些规则。</p>
+</blockquote>
+<p>书里最重要的一段话。整本书主要都在介绍这些规则。</p>
+<blockquote>
+<p>你必须掌握系统的工作原理以及它是如何设计的。在某些情况下，还要知道为什么这样设计。如果你没有理解系统中的某个部分，那么这通常就是出问题的地方……<br>如果你想要查明系统为什么不工作的话，必须先理解它的工作原理。</p>
+</blockquote>
+<p>想起之前遇到的各个问题，比如我现在仍然搞不懂</p>
+<ol>
+<li>「RecyclerView设置了 wrap_content 之后，跟 PullToRefresh合作的时候会发生先居中再跳的问题」</li>
+<li>「为什么从横屏切回竖屏的时候 PullToRefresh 会先拉到低，再闪回去」<br> 这些问题都可以归因为我不知道「为什么这样子能干活？为什么 RecyclerView 实现一个 wrap_content 对现有的布局改动那么大」。这样的问题我都没去弄懂，为什么我会有自信去解决其他问题呢？<br>解决问题而不带入其他问题，这需要你真的理解系统。</li>
+</ol>
+<blockquote>
+<p>原来的工程师在设计电路时没有查阅引脚的编号以确保连接正确。随后，Kneejerk使问题进一步复杂化，他没有通过理解电路来查明为什么新元件会发热</p>
+</blockquote>
+<ul>
+<li>我是不是经常干这种不知道为什么但是就是能干活，就是不要这么干的事。搞清楚啊，这是你需要弄懂的东西。<blockquote>
+<p>失败的确发生了。我们并不清楚是什么测试序列触发了它，也不知道它是由什么bug引起的。那么，下一步就是忘掉所有假设，让它在工程师面前再次发生</p>
+</blockquote>
+</li>
+</ul>
+<p>想到了之前的场景，可是现在这种情况要蛋疼得多，因为是设备限定的，我怎么排除不是硬件设备导致的呢？我总是归罪于硬件差异。</p>
+<blockquote>
+<p>一直观察，直到把问题的原因锁定在几种可能性之内。<br><br>在调试时应该查找一些什么信息呢？你所选择的那部分内容应该能够证实你的判断，或者显示出你未意料到的行为（正是这些行为导致了bug）。<br><br>如果做了一个改变后看上去没有什么效果，应立即把它改回来。<br><br>找出第一个导致系统出错的版本。</p>
+</blockquote>
+<ul>
+<li>这个经常做？因为改动太大，我找到对应的那个版本并回滚。我大概掌握了这个技能。</li>
+</ul>
+<blockquote>
+<p>发现当视频压缩器尝试处理极难压缩的图案（活动着的格子衬衫）时，它就会停止工作（参见图8-1）。</p>
+</blockquote>
+<p>这个跟之前看过的几个经典例子同样有趣。</p>
+<blockquote>
+<p>永远不要相信自己的假设，特别是当这些假设在一些无法解释的问题中是核心因素的时候…系统是否运行了你要运行的代码？ </p>
+</blockquote>
+<ul>
+<li>说到假设，突然想起预先设定的输入类型。你没法保证输入数据的类型。</li>
+</ul>
+<blockquote>
+<p>当所有其他方法都失败时，再次阅读手册。<br><br>如果你获取了正确的见解、专业知识和经验，将会更快地修复问题。这并不会暴露你的弱点，如果说有什么的话，也只是说明你明智地选择了帮助。<br><br>在向别人描述问题的时候，一定要记住一件事：报告症状，而不要讲你的理论。之所以要从别人那里获得全新的观点，就是因为你的理论起不到任何作用</p>
+</blockquote>
+<p>这跟之前看到的如何提问那本书一样。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;正文&quot;&gt;&lt;a href=&quot;#正文&quot; class=&quot;headerlink&quot; title=&quot;正文&quot;&gt;&lt;/a&gt;正文&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;当你发现你在随便改东西的时候，你要注意你又是在「猜测」而不是「观察」。 &lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="读书" scheme="https://brainku.github.io/categories/%E8%AF%BB%E4%B9%A6/"/>
+    
+    
+      <category term="读书" scheme="https://brainku.github.io/tags/%E8%AF%BB%E4%B9%A6/"/>
+    
+      <category term="实用向" scheme="https://brainku.github.io/tags/%E5%AE%9E%E7%94%A8%E5%90%91/"/>
+    
+  </entry>
+  
+  <entry>
     <title>读《代码整洁之道》</title>
     <link href="https://brainku.github.io/2016/08/10/read-clean-code/"/>
     <id>https://brainku.github.io/2016/08/10/read-clean-code/</id>
@@ -659,9 +804,9 @@
       <category term="读书" scheme="https://brainku.github.io/categories/%E8%AF%BB%E4%B9%A6/"/>
     
     
-      <category term="笔记" scheme="https://brainku.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
-    
       <category term="读书" scheme="https://brainku.github.io/tags/%E8%AF%BB%E4%B9%A6/"/>
+    
+      <category term="笔记" scheme="https://brainku.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
     
       <category term="android" scheme="https://brainku.github.io/tags/android/"/>
     
@@ -728,9 +873,9 @@
     </summary>
     
     
-      <category term="笔记" scheme="https://brainku.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
-    
       <category term="读书" scheme="https://brainku.github.io/tags/%E8%AF%BB%E4%B9%A6/"/>
+    
+      <category term="笔记" scheme="https://brainku.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
@@ -778,9 +923,9 @@
     </summary>
     
     
-      <category term="笔记" scheme="https://brainku.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
-    
       <category term="读书" scheme="https://brainku.github.io/tags/%E8%AF%BB%E4%B9%A6/"/>
+    
+      <category term="笔记" scheme="https://brainku.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
@@ -878,9 +1023,9 @@
     </summary>
     
     
-      <category term="笔记" scheme="https://brainku.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
-    
       <category term="读书" scheme="https://brainku.github.io/tags/%E8%AF%BB%E4%B9%A6/"/>
+    
+      <category term="笔记" scheme="https://brainku.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
