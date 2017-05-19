@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://brainku.github.io/"/>
-  <updated>2017-05-17T13:18:37.000Z</updated>
+  <updated>2017-05-19T13:19:03.000Z</updated>
   <id>https://brainku.github.io/</id>
   
   <author>
@@ -14,6 +14,48 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hello Kotlin</title>
+    <link href="https://brainku.github.io/2017/05/19/hello-kotlin/"/>
+    <id>https://brainku.github.io/2017/05/19/hello-kotlin/</id>
+    <published>2017-05-19T11:32:37.000Z</published>
+    <updated>2017-05-19T13:19:03.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>估计过段时间就会冒出一堆 5 分钟 kotlin 快速入门了，反正我就不凑这个热闹了（。）</p>
+<p>想想我接触 kotlin 并没有多早，起码不是 beta 版开始的用户。如果不是这次 IO，我大概会把 kotlin 直接就丢在那里吧。</p>
+<a id="more"></a>
+<blockquote>
+<p><em>16.02.16 玩一下kotlin【把教程的quiz都pass了</em></p>
+</blockquote>
+<p>一年前 kotlin 出 1.0 的时候，我当时还决定了好好玩一下。当然也只是玩一下而已，很快就放下了。今年决定学一门新语言的时候又把 kotlin 捡了起来，起码是把文档都翻完了，但敲了些 demo 之后又没怎么用了。<br>直到这次 IO。</p>
+<hr>
+<p>IO 的第一天，那天早上我起得有点晚，刷了一下推之后发现 JetBrain 写了篇「<a href="https://blog.jetbrains.com/kotlin/2017/05/kotlin-on-android-now-official/" target="_blank" rel="external">kotlin on android now official</a>」，offical？？瞬间清醒了。赶紧继续往下翻，找到 Google 官方提到这件事的推，这竟然是真的？！<br>kotlin 真的成为了 Android 的 first-class language，以后再也不用担心官方搞 Jack&amp;Jill 这种对其他语言不友好的工具链了~！</p>
+<hr>
+<p>之前用 kotlin 出的时候就一直在担心没有官方支持的语言哪天会不会出事。<br>16 年 3 月，在 Google 说他们在搞 <a href="http://developer.android.com/intl/zh-cn/preview/j8-jack.html#supported-features" target="_blank" rel="external">Jack&amp;Jill</a> 的时候我就有 bingo 的感觉。使用 Jack 编译的 library 不会经过生成 class 文件这一步，合并之前已经是  dex 了。这对实际是编译成字节码的 kotlin 的影响可以说是致命的。如果 Google 哪天真的主推了 Jack（只是更新一个 tools 的事），那 kotlin 该怎么办？</p>
+<p>但过了一年之后，这个问题突然被解决了。<br>Google 放弃了他们的 <a href="https://android-developers.googleblog.com/2017/03/future-of-java-8-language-feature.html" target="_blank" rel="external">Jack 计划</a>。Java8 的特性仍然会通过 javac 的方式实现，还是熟悉的 .class，于是使用 kotlin 最大的问题解决了。<br>再然后就是今年的 IO 看到 kotlin 成为官方语言的好消息了。可喜可贺~</p>
+<hr>
+<p>后来看视频，官方宣布了在周五会有两场关于 kotlin 的演讲，其中一位是 Square 的 Jake Wharton。我突然才意识到，JW 最近在 medium 更新的那么多篇 kotlin 相关的文章代表什么意思。<br>Google 必须是提前就跟他打好交道了，所以 JW 才会在他们的团队博客上<a href="https://medium.com/square-corner-blog/square-open-source-loves-kotlin-c57c21710a17" target="_blank" rel="external">推广 kotlin</a>。<br>JW 在 15 年就写了<a href="https://docs.google.com/document/d/1ReS3ep-hjxWA8kZi0YqDbEhCqTt29hG8P44aA9W0DM8/edit?usp=sharing" target="_blank" rel="external"> 22 页文档</a>在团队里推广 kotlin，真佩服他有远见。不过也多亏 JW 的号响力吧，这两年来真的没少提过 kotlin，google 在文章里也引用了他的某次演讲。最近 JW 还会参加 kotlin 团队举办的 <a href="https://www.kotlinconf.com/" target="_blank" rel="external">KotlinConf</a>，真期待这个会议会讲什么有趣的内容。</p>
+<hr>
+<p>我现在也得好好充电了，三月翻完文档，敲了demo之后，我又停下来了。kotlin 刚加进去的 coroutines 也没怎么去了解。<br>现在唯二两本关于 kotlin 的书，其中一本是 <a href="https://leanpub.com/kotlin-for-android-developers" target="_blank" rel="external">Kotlin for Android Developers</a>，不过好贵orz<br>翻了 sample 没有什么实质内容（连全目录都没有），还不如自己好好看文档呢。<br>为什么国外的 sample 都这么小气啊……</p>
+<p>但比起书，果然更重要的还是 side project 啊。得做一个长期坚持下去的项目，这样新的东西才可以用上去。多用才是学语言最好的方式，总得有实践才行。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;估计过段时间就会冒出一堆 5 分钟 kotlin 快速入门了，反正我就不凑这个热闹了（。）&lt;/p&gt;
+&lt;p&gt;想想我接触 kotlin 并没有多早，起码不是 beta 版开始的用户。如果不是这次 IO，我大概会把 kotlin 直接就丢在那里吧。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="android" scheme="https://brainku.github.io/categories/android/"/>
+    
+    
+      <category term="android" scheme="https://brainku.github.io/tags/android/"/>
+    
+      <category term="kotlin" scheme="https://brainku.github.io/tags/kotlin/"/>
+    
+  </entry>
   
   <entry>
     <title>《君の名は》と《Another Side：EarthBound》</title>
@@ -854,9 +896,9 @@
       <category term="读书" scheme="https://brainku.github.io/categories/%E8%AF%BB%E4%B9%A6/"/>
     
     
-      <category term="读书" scheme="https://brainku.github.io/tags/%E8%AF%BB%E4%B9%A6/"/>
-    
       <category term="笔记" scheme="https://brainku.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="读书" scheme="https://brainku.github.io/tags/%E8%AF%BB%E4%B9%A6/"/>
     
       <category term="android" scheme="https://brainku.github.io/tags/android/"/>
     
@@ -923,9 +965,9 @@
     </summary>
     
     
-      <category term="读书" scheme="https://brainku.github.io/tags/%E8%AF%BB%E4%B9%A6/"/>
-    
       <category term="笔记" scheme="https://brainku.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="读书" scheme="https://brainku.github.io/tags/%E8%AF%BB%E4%B9%A6/"/>
     
   </entry>
   
@@ -973,9 +1015,9 @@
     </summary>
     
     
-      <category term="读书" scheme="https://brainku.github.io/tags/%E8%AF%BB%E4%B9%A6/"/>
-    
       <category term="笔记" scheme="https://brainku.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="读书" scheme="https://brainku.github.io/tags/%E8%AF%BB%E4%B9%A6/"/>
     
   </entry>
   
@@ -1073,9 +1115,9 @@
     </summary>
     
     
-      <category term="读书" scheme="https://brainku.github.io/tags/%E8%AF%BB%E4%B9%A6/"/>
-    
       <category term="笔记" scheme="https://brainku.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="读书" scheme="https://brainku.github.io/tags/%E8%AF%BB%E4%B9%A6/"/>
     
   </entry>
   
