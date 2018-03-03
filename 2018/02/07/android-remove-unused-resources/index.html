@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="工程实践," />
+  <meta name="keywords" content="android,andriod studio,优化," />
 
 
 
@@ -86,17 +86,17 @@
 
 
 
-<meta name="description" content="前言无关的前言。六月时买的书，一直藏着没打算看。把深入理解 Android 卷III 翻完之后就决定把这本书翻了。">
-<meta name="keywords" content="工程实践">
+<meta name="description" content="项目中已经很久没有清理资源了，趁着这次删除手机直播的机会再重新研究了下 AS 的 remove unused resource 操作。">
+<meta name="keywords" content="android,andriod studio,优化">
 <meta property="og:type" content="article">
-<meta property="og:title" content="读《代码整洁之道》">
-<meta property="og:url" content="https://brainku.github.io/2016/08/10/read-clean-code/index.html">
+<meta property="og:title" content="android remove unused resources">
+<meta property="og:url" content="https://brainku.github.io/2018/02/07/android-remove-unused-resources/index.html">
 <meta property="og:site_name" content="Self Driven">
-<meta property="og:description" content="前言无关的前言。六月时买的书，一直藏着没打算看。把深入理解 Android 卷III 翻完之后就决定把这本书翻了。">
-<meta property="og:updated_time" content="2017-05-17T13:17:51.000Z">
+<meta property="og:description" content="项目中已经很久没有清理资源了，趁着这次删除手机直播的机会再重新研究了下 AS 的 remove unused resource 操作。">
+<meta property="og:updated_time" content="2018-03-03T08:15:41.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="读《代码整洁之道》">
-<meta name="twitter:description" content="前言无关的前言。六月时买的书，一直藏着没打算看。把深入理解 Android 卷III 翻完之后就决定把这本书翻了。">
+<meta name="twitter:title" content="android remove unused resources">
+<meta name="twitter:description" content="项目中已经很久没有清理资源了，趁着这次删除手机直播的机会再重新研究了下 AS 的 remove unused resource 操作。">
 
 
 
@@ -124,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="https://brainku.github.io/2016/08/10/read-clean-code/"/>
+  <link rel="canonical" href="https://brainku.github.io/2018/02/07/android-remove-unused-resources/"/>
 
 
 
 
 
-  <title> 读《代码整洁之道》 | Self Driven </title>
+  <title> android remove unused resources | Self Driven </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -253,7 +253,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://brainku.github.io/2016/08/10/read-clean-code/">
+  <link itemprop="mainEntityOfPage" href="https://brainku.github.io/2018/02/07/android-remove-unused-resources/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="苦辛味">
@@ -277,7 +277,7 @@
             
             
               
-                读《代码整洁之道》
+                android remove unused resources
               
             
           </h1>
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-08-10T23:03:00+08:00">
-                2016-08-10
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-07T15:52:27+08:00">
+                2018-02-07
               </time>
             
 
@@ -315,8 +315,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/读书/" itemprop="url" rel="index">
-                    <span itemprop="name">读书</span>
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
                   </a>
                 </span>
 
@@ -350,29 +350,24 @@
       
 
       
-        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>无关的前言。六月时买的书，一直藏着没打算看。把深入理解 Android 卷III 翻完之后就决定把这本书翻了。</p>
+        <p>项目中已经很久没有清理资源了，趁着这次删除手机直播的机会再重新研究了下 AS 的 remove unused resource 操作。</p>
 <a id="more"></a>
-<h3 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h3><p>作为一本指导类型的书，这本书讲了从变量名一直到多线程同步编程，系统设计，涵盖了各种细节到大观。  </p>
-<p>说结论，我个人并不是很喜欢这本书。相较于程序员修炼之道，这本书有大量主观的说法。  </p>
-<hr>
-<p>关于命名，我非常赞同作者的说法。在项目里我见过太多名字被起得莫名其妙的类，域名，方法。这些类根本让人无法搜索，只能通过入口去一层一层深入。这真的是一件让人很恼火的事。<br>作者也把匈牙利命名法批判了一番，这种前缀毫无意义。前缀跟后缀应该使用来表示 Context，而非用于标记这是一个变量或者其他。</p>
-<hr>
-<p>关于方法，我赞同有些方法应该尽可能地短，函数名应该尽可能表达其含义。但我在书里所看到的是，不少是支离破碎的细节。确实，尽可能地提取了函数之后，逻辑上会更加清晰，但跳转逻辑太多也会让人恼火。我更习惯于在逻辑快变得复杂时，将这一部分单独提取出来。把每个 if 语句的判断逻辑都写成一个函数，我应该也没有这种重构的时间。<br>另外，作者偶尔也会自我矛盾。有时候他提取了小逻辑，有时候他又说这没必要。这其中并没有一个标准。  </p>
-<hr>
-<p>关于注释，「注释最多只是一种必须的恶」。因为你没法用你的函数名清楚地告诉调用者使用之后会发生什么事，所以你要说明。<br>作者提到的是否需要注释的部分，有些只能算是说说罢了。比如说，公共使用的 API 需要注释。你并没法保证你做的这个模块是否会成为公共模块，所以你到底要不要写注释呢？<br>关于糟糕的注释也是，修炼之道告诉你，你要署名，因为这代表是你所完成的，代表你对这份代码负责。这本书告诉你：署名？丢掉吧，版本控制系统会告诉你。但我个人倾向于修炼之道的做法。   </p>
-<hr>
-<p>「<strong>一组开发者应当认同同一种格式风格，每个成员都应该采用那种风格。</strong>」这句话真的是戳到了我的痛点，我在跟一群完全不在乎这种事的人共事着。连格式都不在乎，他们怎能写出让人愉快的代码？</p>
-<hr>
-<p>书里关于异常处理的代码，确实是让我看到异常的另外一种处理方法。将内部抛出的各类异常包裹成自己的异常，使内部的代码尽可能地简洁，即 try 块中只有正常执行的代码。这种代码看起来真的蛮舒服的，值得一试。</p>
-<hr>
-<p>这本书后半很大一部分的内容都是作者在教你怎么把一段看起来不怎么「优雅」的代码改成<strong>他想要的样子</strong>。书的最后更是贴了六十几页的代码来举一个完整的例子。<br>可是我在他改的过程中所看到很多是作者自己主观的想法。一个函数到底多短才可以？这真的不只是越短越好。hot point 的话，方法内联也是必须的。如果你知道一个函数会把大量调用，适当减少调用层次会帮你不少忙。另外，时间跟效率的平衡也是值得考虑的一件事。我真没空把函数拆得支离破碎，在保证「一定」整洁性的前提下，我得去干其他事。</p>
-<hr>
-<p>书里提到的大量重构的内容，我觉得我大概怎么都做不了吧。Android 真不是一个希望你能给你的应用写测试的平台。</p>
-<h3 id="另外一件事"><a href="#另外一件事" class="headerlink" title="另外一件事"></a>另外一件事</h3><p>这是一部译著，这本书需要评论还有它的翻译。<br>我想，如果当初我是在实体书店翻过这本书的话，我是一定不会买的吧。这个翻译翻出来的文字读起来让人特别纠结，文诌诌的（比如把依赖翻成依恋），完全没有作者在某些地方表现出来的幽默感。最可怕的是，这个译者有些专业术语更是不可原谅地翻错了。explaining temporary variables - 解释临时变量模式？what？具有解释性的临时变量多正常。把 decorator 翻成油漆工？把 collection 翻成集群类？真怀疑译者到底有没有起码看过一本设计模式书籍或者Java入门书。</p>
-<h3 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h3><p>如果要给这本书一个评分的吧，就像我在豆瓣上给的，原书4分，翻译2分。这个翻译太糟糕，列入黑名单。<br>在豆瓣上给的评价：</p>
+<h4 id="关于-RUR"><a href="#关于-RUR" class="headerlink" title="关于 RUR"></a>关于 RUR</h4><p>Remove Unused Resources （Refactor-&gt; RUR）是 AS 2.0+ 后加进来用来清除未使用资源的操作。在执行引用的分析之后会列出所有未被使用的 drawable/style/string/layout 资源，统一进行清除。</p>
+<p>在 AS 刚增加这个操作的时候曾对项目执行过一次，但删除了识别出的文件之后的大量编译错误让我觉得这个操作并不靠谱。而且这个操作无法针对性的设置白名单，貌似‘ 只能’ 在扫描之后手动 exclude 也让觉得很麻烦。<br>项目里面需要设置的白名单不少，所有不是通过 R.xx 方式引用的资源，比如通过 <code>getIdentifier</code> 方式获取的，还有通过反射调用 <code>R.java</code> 域的，这些都没法通过查找引用的方式检查出来。</p>
+<h4 id="设置白名单"><a href="#设置白名单" class="headerlink" title="设置白名单"></a>设置白名单</h4><p>这次趁着删代码的机会再找了下删除资源的好方法，看到了官网提到的 <a href="https://developer.android.com/studio/build/shrink-code.html#keep-resources" target="_blank" rel="external">keep resource</a> ：</p>
 <blockquote>
-<p>「4分给原作，翻译2分。整本书看起来极其费力。译者好像在追求着用语的与众不同，比如把依赖翻成依恋？译者的辞藻是不是用错地方了。看霍炬翻的重构我都没有这种感觉，人家是翻得是真有文采跟幽默感。这本书最糟糕的是把一些专业术语翻得莫名其妙，把装饰器翻成油漆工？集合类翻成集群类。任何一个看过设计模式跟Java入门书的人都不会这么翻。」</p>
+<p>如果您有想要保留或舍弃的特定资源，请在您的项目中创建一个包含 <resources> 标记的 XML 文件，并在 tools:keep 属性中指定每个要保留的资源。…将该文件保存在项目资源中，例如，保存在 res/raw/keep.xml。构建不会将该文件打包到 APK 之中。</resources></p>
 </blockquote>
+<p>像下面这样定义：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">- keep.xml</div><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">resources</span> <span class="attr">xmlns:tools</span>=<span class="string">"http://schemas.android.com/tools"</span></span></div><div class="line">    <span class="attr">tools:keep</span>=<span class="string">"</span></div><div class="line">    @layout/l_used*_c,</div><div class="line">    @layout/l_used_b*"</div><div class="line">    <span class="attr">tools:discard</span>=<span class="string">"@layout/unused2"</span> /&gt; // discard 表示需要删除的资源，不大常用</div></pre></td></tr></table></figure>
+<h4 id="实操"><a href="#实操" class="headerlink" title="实操"></a>实操</h4><p>既然 <code>shrinkResources</code> 会读这个配置，那抱着 RUR 是不是也会的想法尝试了一下。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">resources</span> <span class="attr">xmlns:tools</span>=<span class="string">"http://schemas.android.com/tools"</span></span></div><div class="line">           <span class="attr">tools:keep</span>=<span class="string">"</span></div><div class="line">           @drawable/face_*,</div><div class="line">           @dimen/*,</div><div class="line">           @style/*,</div><div class="line">           @string/*,</div><div class="line">           @color/*,</div><div class="line">           @array/*"/&gt;</div></pre></td></tr></table></figure>
+<p>这个配置文件会忽略以 <code>face_</code> 结尾的 drawable 资源跟所有的 style/dimen/string/color/array 未使用资源。<br>实际执行了一次，扫描结果确实是忽略了这些未使用资源。结果看起来不错，1k 个文件，尝试删除并编译，果然还是报错了。<br>提示信息是说找不到特定布局跟 id，RUR 的引用判断还是有问题吗？粗略看了出错的几个文件，引用 id 的这个类还在使用，对应的布局不应该被删吧。<br>先不深究，把被误删的布局加进 keep 文件，然后恢复之前 RUR 删除的文件重新执行 RUR。<br>注意这里最好不要单独 revert 误删的文件，布局文件里还可能引用其他布局或者资源，在上次清除时可能连带被删，还得再找出这些资源一个个 revert，没准还带递归引用。<br>这次再跑 RUR 可以正常运行了，随便再在其他分支看了几个被删除的布局也确实没引用，RUR 操作成功了。</p>
+<h4 id="深究白名单文件"><a href="#深究白名单文件" class="headerlink" title="深究白名单文件"></a>深究白名单文件</h4><p>删完资源再来看看几个被加进白名单的布局。</p>
+<h5 id="第一类"><a href="#第一类" class="headerlink" title="第一类"></a>第一类</h5><p>尝试搜了其中一个布局，<code>layout_game_room_landscape_bottom</code>。在代码里面搜不到这个布局的引用，但直接删除之后项目就编译出错了，提示找不到对应 id 的资源。<br>原因 Get，这类布局删掉报错其实就是布局真没再使用，但是 id 仍然在代码里被引用导致的。find 这些 id 的操作实际只会返回 null，但因为加了非空判断，项目里不会崩。后面要做的就是把这块业务对应的代码一起删掉，不能只删布局。</p>
+<h5 id="第二类"><a href="#第二类" class="headerlink" title="第二类"></a>第二类</h5><p>排除了白名单里上面这类布局之后，还剩下一类布局，这类布局有个共性就是布局只被用在 <code>new XXBaseAdapter(context, R.layout.xxx)</code> 这个构造函数里。只要构造函数传入的布局就会被删除？<br>仔细想了下不大可能，因为 ArrayAdapter 的构造函数就是 <code>ArrayAdapter(context, layoutId)</code>，这可能一下子就会误判很多布局。<br>另外写了一个 demo 来验证最小被误删除的原型，最后发现是这个：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ArrayAdapter&lt;String&gt; adapter = new ArrayAdapter&lt;String&gt;(this, R.layout.layout_simple_remove) &#123;&#125;;</div></pre></td></tr></table></figure></p>
+<p>如果 <code>R.layout.layout_simple_remove</code> 只在这里被引用，那 RUR 就会提示这个布局未被引用可删除。如果去掉后面的匿名类实现声明，这个布局的引用又能被正常找出来了。bug 无疑，不过竟然没人提过，是不是这操作都没什么人用呢。</p>
+<p>资源删除 done，目前看似乎没什么问题，静待回归。</p>
 
       
     </div>
@@ -396,7 +391,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/工程实践/" rel="tag"># 工程实践</a>
+            <a href="/tags/android/" rel="tag"># android</a>
+          
+            <a href="/tags/andriod-studio/" rel="tag"># andriod studio</a>
+          
+            <a href="/tags/优化/" rel="tag"># 优化</a>
           
         </div>
       
@@ -405,8 +404,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2014/10/14/learn-python-in-a-quick-way/" rel="next" title="Python的快速入门--《A Byte of Python》">
-                <i class="fa fa-chevron-left"></i> Python的快速入门--《A Byte of Python》
+              <a href="/2017/05/19/hello-kotlin/" rel="next" title="Hello Kotlin">
+                <i class="fa fa-chevron-left"></i> Hello Kotlin
               </a>
             
           </div>
@@ -414,10 +413,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/12/11/debugging-the-9-rules/" rel="prev" title="《调试九法：软硬件错误的排查之道》">
-                《调试九法：软硬件错误的排查之道》 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -547,7 +542,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正文"><span class="nav-number">2.</span> <span class="nav-text">正文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#另外一件事"><span class="nav-number">3.</span> <span class="nav-text">另外一件事</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#まとめ"><span class="nav-number">4.</span> <span class="nav-text">まとめ</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#关于-RUR"><span class="nav-number">1.</span> <span class="nav-text">关于 RUR</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置白名单"><span class="nav-number">2.</span> <span class="nav-text">设置白名单</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实操"><span class="nav-number">3.</span> <span class="nav-text">实操</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#深究白名单文件"><span class="nav-number">4.</span> <span class="nav-text">深究白名单文件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#第一类"><span class="nav-number">4.1.</span> <span class="nav-text">第一类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第二类"><span class="nav-number">4.2.</span> <span class="nav-text">第二类</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://brainku.github.io/"/>
-  <updated>2017-05-19T13:19:03.000Z</updated>
+  <updated>2018-03-03T08:15:41.000Z</updated>
   <id>https://brainku.github.io/</id>
   
   <author>
@@ -16,11 +16,55 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>android remove unused resources</title>
+    <link href="https://brainku.github.io/2018/02/07/android-remove-unused-resources/"/>
+    <id>https://brainku.github.io/2018/02/07/android-remove-unused-resources/</id>
+    <published>2018-02-07T07:52:27.000Z</published>
+    <updated>2018-03-03T08:15:41.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>项目中已经很久没有清理资源了，趁着这次删除手机直播的机会再重新研究了下 AS 的 remove unused resource 操作。</p>
+<a id="more"></a>
+<h4 id="关于-RUR"><a href="#关于-RUR" class="headerlink" title="关于 RUR"></a>关于 RUR</h4><p>Remove Unused Resources （Refactor-&gt; RUR）是 AS 2.0+ 后加进来用来清除未使用资源的操作。在执行引用的分析之后会列出所有未被使用的 drawable/style/string/layout 资源，统一进行清除。</p>
+<p>在 AS 刚增加这个操作的时候曾对项目执行过一次，但删除了识别出的文件之后的大量编译错误让我觉得这个操作并不靠谱。而且这个操作无法针对性的设置白名单，貌似‘ 只能’ 在扫描之后手动 exclude 也让觉得很麻烦。<br>项目里面需要设置的白名单不少，所有不是通过 R.xx 方式引用的资源，比如通过 <code>getIdentifier</code> 方式获取的，还有通过反射调用 <code>R.java</code> 域的，这些都没法通过查找引用的方式检查出来。</p>
+<h4 id="设置白名单"><a href="#设置白名单" class="headerlink" title="设置白名单"></a>设置白名单</h4><p>这次趁着删代码的机会再找了下删除资源的好方法，看到了官网提到的 <a href="https://developer.android.com/studio/build/shrink-code.html#keep-resources" target="_blank" rel="external">keep resource</a> ：</p>
+<blockquote>
+<p>如果您有想要保留或舍弃的特定资源，请在您的项目中创建一个包含 <resources> 标记的 XML 文件，并在 tools:keep 属性中指定每个要保留的资源。…将该文件保存在项目资源中，例如，保存在 res/raw/keep.xml。构建不会将该文件打包到 APK 之中。</resources></p>
+</blockquote>
+<p>像下面这样定义：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">- keep.xml</div><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">resources</span> <span class="attr">xmlns:tools</span>=<span class="string">"http://schemas.android.com/tools"</span></span></div><div class="line">    <span class="attr">tools:keep</span>=<span class="string">"</span></div><div class="line">    @layout/l_used*_c,</div><div class="line">    @layout/l_used_b*"</div><div class="line">    <span class="attr">tools:discard</span>=<span class="string">"@layout/unused2"</span> /&gt; // discard 表示需要删除的资源，不大常用</div></pre></td></tr></table></figure>
+<h4 id="实操"><a href="#实操" class="headerlink" title="实操"></a>实操</h4><p>既然 <code>shrinkResources</code> 会读这个配置，那抱着 RUR 是不是也会的想法尝试了一下。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">resources</span> <span class="attr">xmlns:tools</span>=<span class="string">"http://schemas.android.com/tools"</span></span></div><div class="line">           <span class="attr">tools:keep</span>=<span class="string">"</span></div><div class="line">           @drawable/face_*,</div><div class="line">           @dimen/*,</div><div class="line">           @style/*,</div><div class="line">           @string/*,</div><div class="line">           @color/*,</div><div class="line">           @array/*"/&gt;</div></pre></td></tr></table></figure>
+<p>这个配置文件会忽略以 <code>face_</code> 结尾的 drawable 资源跟所有的 style/dimen/string/color/array 未使用资源。<br>实际执行了一次，扫描结果确实是忽略了这些未使用资源。结果看起来不错，1k 个文件，尝试删除并编译，果然还是报错了。<br>提示信息是说找不到特定布局跟 id，RUR 的引用判断还是有问题吗？粗略看了出错的几个文件，引用 id 的这个类还在使用，对应的布局不应该被删吧。<br>先不深究，把被误删的布局加进 keep 文件，然后恢复之前 RUR 删除的文件重新执行 RUR。<br>注意这里最好不要单独 revert 误删的文件，布局文件里还可能引用其他布局或者资源，在上次清除时可能连带被删，还得再找出这些资源一个个 revert，没准还带递归引用。<br>这次再跑 RUR 可以正常运行了，随便再在其他分支看了几个被删除的布局也确实没引用，RUR 操作成功了。</p>
+<h4 id="深究白名单文件"><a href="#深究白名单文件" class="headerlink" title="深究白名单文件"></a>深究白名单文件</h4><p>删完资源再来看看几个被加进白名单的布局。</p>
+<h5 id="第一类"><a href="#第一类" class="headerlink" title="第一类"></a>第一类</h5><p>尝试搜了其中一个布局，<code>layout_game_room_landscape_bottom</code>。在代码里面搜不到这个布局的引用，但直接删除之后项目就编译出错了，提示找不到对应 id 的资源。<br>原因 Get，这类布局删掉报错其实就是布局真没再使用，但是 id 仍然在代码里被引用导致的。find 这些 id 的操作实际只会返回 null，但因为加了非空判断，项目里不会崩。后面要做的就是把这块业务对应的代码一起删掉，不能只删布局。</p>
+<h5 id="第二类"><a href="#第二类" class="headerlink" title="第二类"></a>第二类</h5><p>排除了白名单里上面这类布局之后，还剩下一类布局，这类布局有个共性就是布局只被用在 <code>new XXBaseAdapter(context, R.layout.xxx)</code> 这个构造函数里。只要构造函数传入的布局就会被删除？<br>仔细想了下不大可能，因为 ArrayAdapter 的构造函数就是 <code>ArrayAdapter(context, layoutId)</code>，这可能一下子就会误判很多布局。<br>另外写了一个 demo 来验证最小被误删除的原型，最后发现是这个：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ArrayAdapter&lt;String&gt; adapter = new ArrayAdapter&lt;String&gt;(this, R.layout.layout_simple_remove) &#123;&#125;;</div></pre></td></tr></table></figure></p>
+<p>如果 <code>R.layout.layout_simple_remove</code> 只在这里被引用，那 RUR 就会提示这个布局未被引用可删除。如果去掉后面的匿名类实现声明，这个布局的引用又能被正常找出来了。bug 无疑，不过竟然没人提过，是不是这操作都没什么人用呢。</p>
+<p>资源删除 done，目前看似乎没什么问题，静待回归。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;项目中已经很久没有清理资源了，趁着这次删除手机直播的机会再重新研究了下 AS 的 remove unused resource 操作。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="android" scheme="https://brainku.github.io/categories/android/"/>
+    
+    
+      <category term="android" scheme="https://brainku.github.io/tags/android/"/>
+    
+      <category term="andriod studio" scheme="https://brainku.github.io/tags/andriod-studio/"/>
+    
+      <category term="优化" scheme="https://brainku.github.io/tags/%E4%BC%98%E5%8C%96/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Hello Kotlin</title>
     <link href="https://brainku.github.io/2017/05/19/hello-kotlin/"/>
     <id>https://brainku.github.io/2017/05/19/hello-kotlin/</id>
     <published>2017-05-19T11:32:37.000Z</published>
-    <updated>2017-05-19T13:19:03.000Z</updated>
+    <updated>2017-08-19T14:46:30.000Z</updated>
     
     <content type="html"><![CDATA[<p>估计过段时间就会冒出一堆 5 分钟 kotlin 快速入门了，反正我就不凑这个热闹了（。）</p>
 <p>想想我接触 kotlin 并没有多早，起码不是 beta 版开始的用户。如果不是这次 IO，我大概会把 kotlin 直接就丢在那里吧。</p>
