@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://brainku.github.io/"/>
-  <updated>2018-03-03T08:15:41.000Z</updated>
+  <updated>2018-03-03T08:18:23.000Z</updated>
   <id>https://brainku.github.io/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>android remove unused resources</title>
+    <title>android 清理未使用资源</title>
     <link href="https://brainku.github.io/2018/02/07/android-remove-unused-resources/"/>
     <id>https://brainku.github.io/2018/02/07/android-remove-unused-resources/</id>
     <published>2018-02-07T07:52:27.000Z</published>
-    <updated>2018-03-03T08:15:41.000Z</updated>
+    <updated>2018-03-03T08:18:23.000Z</updated>
     
     <content type="html"><![CDATA[<p>项目中已经很久没有清理资源了，趁着这次删除手机直播的机会再重新研究了下 AS 的 remove unused resource 操作。</p>
 <a id="more"></a>
@@ -142,9 +142,9 @@
       <category term="读书" scheme="https://brainku.github.io/categories/%E8%AF%BB%E4%B9%A6/"/>
     
     
-      <category term="小说" scheme="https://brainku.github.io/tags/%E5%B0%8F%E8%AF%B4/"/>
-    
       <category term="日语" scheme="https://brainku.github.io/tags/%E6%97%A5%E8%AF%AD/"/>
+    
+      <category term="小说" scheme="https://brainku.github.io/tags/%E5%B0%8F%E8%AF%B4/"/>
     
       <category term="电影" scheme="https://brainku.github.io/tags/%E7%94%B5%E5%BD%B1/"/>
     
@@ -191,9 +191,9 @@
       <category term="外语" scheme="https://brainku.github.io/categories/%E5%A4%96%E8%AF%AD/"/>
     
     
-      <category term="日语" scheme="https://brainku.github.io/tags/%E6%97%A5%E8%AF%AD/"/>
-    
       <category term="自学" scheme="https://brainku.github.io/tags/%E8%87%AA%E5%AD%A6/"/>
+    
+      <category term="日语" scheme="https://brainku.github.io/tags/%E6%97%A5%E8%AF%AD/"/>
     
   </entry>
   
@@ -940,9 +940,9 @@
       <category term="读书" scheme="https://brainku.github.io/categories/%E8%AF%BB%E4%B9%A6/"/>
     
     
-      <category term="笔记" scheme="https://brainku.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
-    
       <category term="读书" scheme="https://brainku.github.io/tags/%E8%AF%BB%E4%B9%A6/"/>
+    
+      <category term="笔记" scheme="https://brainku.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
     
       <category term="android" scheme="https://brainku.github.io/tags/android/"/>
     
@@ -1009,9 +1009,9 @@
     </summary>
     
     
-      <category term="笔记" scheme="https://brainku.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
-    
       <category term="读书" scheme="https://brainku.github.io/tags/%E8%AF%BB%E4%B9%A6/"/>
+    
+      <category term="笔记" scheme="https://brainku.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
@@ -1059,9 +1059,9 @@
     </summary>
     
     
-      <category term="笔记" scheme="https://brainku.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
-    
       <category term="读书" scheme="https://brainku.github.io/tags/%E8%AF%BB%E4%B9%A6/"/>
+    
+      <category term="笔记" scheme="https://brainku.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
@@ -1159,9 +1159,9 @@
     </summary>
     
     
-      <category term="笔记" scheme="https://brainku.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
-    
       <category term="读书" scheme="https://brainku.github.io/tags/%E8%AF%BB%E4%B9%A6/"/>
+    
+      <category term="笔记" scheme="https://brainku.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
