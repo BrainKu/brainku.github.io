@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brainku.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="项目中已经很久没有清理资源了，趁着这次删除手机直播的机会再重新研究了下 AS 的 remove unused resource 操作。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android 清理未使用资源">
+<meta property="og:url" content="https://brainku.github.io/2018/02/07/android-remove-unused-resources/index.html">
+<meta property="og:site_name" content="Self Driven">
+<meta property="og:description" content="项目中已经很久没有清理资源了，趁着这次删除手机直播的机会再重新研究了下 AS 的 remove unused resource 操作。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-02-07T07:52:27.000Z">
+<meta property="article:modified_time" content="2018-03-03T08:18:23.000Z">
+<meta property="article:author" content="苦辛味">
+<meta property="article:tag" content="android">
+<meta property="article:tag" content="andriod studio">
+<meta property="article:tag" content="优化">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://brainku.github.io/2018/02/07/android-remove-unused-resources/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>android 清理未使用资源 | Self Driven</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Self Driven</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">兴趣是1，坚持是剩下的99</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://brainku.github.io/2018/02/07/android-remove-unused-resources/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="苦辛味">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Self Driven">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          android 清理未使用资源
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-02-07 15:52:27" itemprop="dateCreated datePublished" datetime="2018-02-07T15:52:27+08:00">2018-02-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-03-03 16:18:23" itemprop="dateModified" datetime="2018-03-03T16:18:23+08:00">2018-03-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index"><span itemprop="name">android</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>项目中已经很久没有清理资源了，趁着这次删除手机直播的机会再重新研究了下 AS 的 remove unused resource 操作。</p>
+<span id="more"></span>
+<h4 id="关于-RUR"><a href="#关于-RUR" class="headerlink" title="关于 RUR"></a>关于 RUR</h4><p>Remove Unused Resources （Refactor-&gt; RUR）是 AS 2.0+ 后加进来用来清除未使用资源的操作。在执行引用的分析之后会列出所有未被使用的 drawable&#x2F;style&#x2F;string&#x2F;layout 资源，统一进行清除。</p>
+<p>在 AS 刚增加这个操作的时候曾对项目执行过一次，但删除了识别出的文件之后的大量编译错误让我觉得这个操作并不靠谱。而且这个操作无法针对性的设置白名单，貌似‘ 只能’ 在扫描之后手动 exclude 也让觉得很麻烦。<br>项目里面需要设置的白名单不少，所有不是通过 R.xx 方式引用的资源，比如通过 <code>getIdentifier</code> 方式获取的，还有通过反射调用 <code>R.java</code> 域的，这些都没法通过查找引用的方式检查出来。</p>
+<h4 id="设置白名单"><a href="#设置白名单" class="headerlink" title="设置白名单"></a>设置白名单</h4><p>这次趁着删代码的机会再找了下删除资源的好方法，看到了官网提到的 <a target="_blank" rel="noopener" href="https://developer.android.com/studio/build/shrink-code.html#keep-resources">keep resource</a> ：</p>
+<blockquote>
+<p>如果您有想要保留或舍弃的特定资源，请在您的项目中创建一个包含 <resources> 标记的 XML 文件，并在 tools:keep 属性中指定每个要保留的资源。…将该文件保存在项目资源中，例如，保存在 res&#x2F;raw&#x2F;keep.xml。构建不会将该文件打包到 APK 之中。</p>
+</blockquote>
+<p>像下面这样定义：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- keep.xml</span><br><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;utf-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">resources</span> <span class="attr">xmlns:tools</span>=<span class="string">&quot;http://schemas.android.com/tools&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">tools:keep</span>=<span class="string">&quot;</span></span></span><br><span class="line"><span class="string"><span class="tag">    @layout/l_used*_c,</span></span></span><br><span class="line"><span class="string"><span class="tag">    @layout/l_used_b*&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">tools:discard</span>=<span class="string">&quot;@layout/unused2&quot;</span> /&gt;</span> // discard 表示需要删除的资源，不大常用</span><br></pre></td></tr></table></figure>
+
+<h4 id="实操"><a href="#实操" class="headerlink" title="实操"></a>实操</h4><p>既然 <code>shrinkResources</code> 会读这个配置，那抱着 RUR 是不是也会的想法尝试了一下。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;utf-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">resources</span> <span class="attr">xmlns:tools</span>=<span class="string">&quot;http://schemas.android.com/tools&quot;</span></span></span><br><span class="line"><span class="tag">           <span class="attr">tools:keep</span>=<span class="string">&quot;</span></span></span><br><span class="line"><span class="string"><span class="tag">           @drawable/face_*,</span></span></span><br><span class="line"><span class="string"><span class="tag">           @dimen/*,</span></span></span><br><span class="line"><span class="string"><span class="tag">           @style/*,</span></span></span><br><span class="line"><span class="string"><span class="tag">           @string/*,</span></span></span><br><span class="line"><span class="string"><span class="tag">           @color/*,</span></span></span><br><span class="line"><span class="string"><span class="tag">           @array/*&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这个配置文件会忽略以 <code>face_</code> 结尾的 drawable 资源跟所有的 style&#x2F;dimen&#x2F;string&#x2F;color&#x2F;array 未使用资源。<br>实际执行了一次，扫描结果确实是忽略了这些未使用资源。结果看起来不错，1k 个文件，尝试删除并编译，果然还是报错了。<br>提示信息是说找不到特定布局跟 id，RUR 的引用判断还是有问题吗？粗略看了出错的几个文件，引用 id 的这个类还在使用，对应的布局不应该被删吧。<br>先不深究，把被误删的布局加进 keep 文件，然后恢复之前 RUR 删除的文件重新执行 RUR。<br>注意这里最好不要单独 revert 误删的文件，布局文件里还可能引用其他布局或者资源，在上次清除时可能连带被删，还得再找出这些资源一个个 revert，没准还带递归引用。<br>这次再跑 RUR 可以正常运行了，随便再在其他分支看了几个被删除的布局也确实没引用，RUR 操作成功了。</p>
+<h4 id="深究白名单文件"><a href="#深究白名单文件" class="headerlink" title="深究白名单文件"></a>深究白名单文件</h4><p>删完资源再来看看几个被加进白名单的布局。</p>
+<h5 id="第一类"><a href="#第一类" class="headerlink" title="第一类"></a>第一类</h5><p>尝试搜了其中一个布局，<code>layout_game_room_landscape_bottom</code>。在代码里面搜不到这个布局的引用，但直接删除之后项目就编译出错了，提示找不到对应 id 的资源。<br>原因 Get，这类布局删掉报错其实就是布局真没再使用，但是 id 仍然在代码里被引用导致的。find 这些 id 的操作实际只会返回 null，但因为加了非空判断，项目里不会崩。后面要做的就是把这块业务对应的代码一起删掉，不能只删布局。</p>
+<h5 id="第二类"><a href="#第二类" class="headerlink" title="第二类"></a>第二类</h5><p>排除了白名单里上面这类布局之后，还剩下一类布局，这类布局有个共性就是布局只被用在 <code>new XXBaseAdapter(context, R.layout.xxx)</code> 这个构造函数里。只要构造函数传入的布局就会被删除？<br>仔细想了下不大可能，因为 ArrayAdapter 的构造函数就是 <code>ArrayAdapter(context, layoutId)</code>，这可能一下子就会误判很多布局。<br>另外写了一个 demo 来验证最小被误删除的原型，最后发现是这个：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ArrayAdapter&lt;String&gt; adapter = new ArrayAdapter&lt;String&gt;(this, R.layout.layout_simple_remove) &#123;&#125;;</span><br></pre></td></tr></table></figure>
+<p>如果 <code>R.layout.layout_simple_remove</code> 只在这里被引用，那 RUR 就会提示这个布局未被引用可删除。如果去掉后面的匿名类实现声明，这个布局的引用又能被正常找出来了。bug 无疑，不过竟然没人提过，是不是这操作都没什么人用呢。</p>
+<p>资源删除 done，目前看似乎没什么问题，静待回归。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/android/" rel="tag"># android</a>
+              <a href="/tags/andriod-studio/" rel="tag"># andriod studio</a>
+              <a href="/tags/%E4%BC%98%E5%8C%96/" rel="tag"># 优化</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/10/23/about-kotlin-scope-function/" rel="prev" title="讲讲 let,with,apply,also,run">
+      <i class="fa fa-chevron-left"></i> 讲讲 let,with,apply,also,run
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/06/05/2019-06-05-tokyo-seven-day/" rel="next" title="东京七日游">
+      东京七日游 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E-RUR"><span class="nav-number">1.</span> <span class="nav-text">关于 RUR</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E7%99%BD%E5%90%8D%E5%8D%95"><span class="nav-number">2.</span> <span class="nav-text">设置白名单</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E6%93%8D"><span class="nav-number">3.</span> <span class="nav-text">实操</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%B1%E7%A9%B6%E7%99%BD%E5%90%8D%E5%8D%95%E6%96%87%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">深究白名单文件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%B1%BB"><span class="nav-number">4.1.</span> <span class="nav-text">第一类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%B1%BB"><span class="nav-number">4.2.</span> <span class="nav-text">第二类</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">苦辛味</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">苦辛味</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brainku.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="估计过段时间就会冒出一堆 5 分钟 kotlin 快速入门了，反正我就不凑这个热闹了（。） 想想我接触 kotlin 并没有多早，起码不是 beta 版开始的用户。如果不是这次 IO，我大概会把 kotlin 直接就丢在那里吧。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hello Kotlin">
+<meta property="og:url" content="https://brainku.github.io/2017/05/19/hello-kotlin/index.html">
+<meta property="og:site_name" content="Self Driven">
+<meta property="og:description" content="估计过段时间就会冒出一堆 5 分钟 kotlin 快速入门了，反正我就不凑这个热闹了（。） 想想我接触 kotlin 并没有多早，起码不是 beta 版开始的用户。如果不是这次 IO，我大概会把 kotlin 直接就丢在那里吧。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-05-19T11:32:37.000Z">
+<meta property="article:modified_time" content="2017-08-19T14:46:30.000Z">
+<meta property="article:author" content="苦辛味">
+<meta property="article:tag" content="android">
+<meta property="article:tag" content="kotlin">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://brainku.github.io/2017/05/19/hello-kotlin/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Hello Kotlin | Self Driven</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Self Driven</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">兴趣是1，坚持是剩下的99</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://brainku.github.io/2017/05/19/hello-kotlin/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="苦辛味">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Self Driven">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Hello Kotlin
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-05-19 19:32:37" itemprop="dateCreated datePublished" datetime="2017-05-19T19:32:37+08:00">2017-05-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2017-08-19 22:46:30" itemprop="dateModified" datetime="2017-08-19T22:46:30+08:00">2017-08-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index"><span itemprop="name">android</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>估计过段时间就会冒出一堆 5 分钟 kotlin 快速入门了，反正我就不凑这个热闹了（。）</p>
+<p>想想我接触 kotlin 并没有多早，起码不是 beta 版开始的用户。如果不是这次 IO，我大概会把 kotlin 直接就丢在那里吧。</p>
+<span id="more"></span>
+
+<blockquote>
+<p><em>16.02.16 玩一下kotlin【把教程的quiz都pass了</em></p>
+</blockquote>
+<p>一年前 kotlin 出 1.0 的时候，我当时还决定了好好玩一下。当然也只是玩一下而已，很快就放下了。今年决定学一门新语言的时候又把 kotlin 捡了起来，起码是把文档都翻完了，但敲了些 demo 之后又没怎么用了。<br>直到这次 IO。</p>
+<hr>
+<p>IO 的第一天，那天早上我起得有点晚，刷了一下推之后发现 JetBrain 写了篇「<a target="_blank" rel="noopener" href="https://blog.jetbrains.com/kotlin/2017/05/kotlin-on-android-now-official/">kotlin on android now official</a>」，offical？？瞬间清醒了。赶紧继续往下翻，找到 Google 官方提到这件事的推，这竟然是真的？！<br>kotlin 真的成为了 Android 的 first-class language，以后再也不用担心官方搞 Jack&amp;Jill 这种对其他语言不友好的工具链了~！</p>
+<hr>
+<p>之前用 kotlin 出的时候就一直在担心没有官方支持的语言哪天会不会出事。<br>16 年 3 月，在 Google 说他们在搞 <a target="_blank" rel="noopener" href="http://developer.android.com/intl/zh-cn/preview/j8-jack.html#supported-features">Jack&amp;Jill</a> 的时候我就有 bingo 的感觉。使用 Jack 编译的 library 不会经过生成 class 文件这一步，合并之前已经是  dex 了。这对实际是编译成字节码的 kotlin 的影响可以说是致命的。如果 Google 哪天真的主推了 Jack（只是更新一个 tools 的事），那 kotlin 该怎么办？</p>
+<p>但过了一年之后，这个问题突然被解决了。<br>Google 放弃了他们的 <a target="_blank" rel="noopener" href="https://android-developers.googleblog.com/2017/03/future-of-java-8-language-feature.html">Jack 计划</a>。Java8 的特性仍然会通过 javac 的方式实现，还是熟悉的 .class，于是使用 kotlin 最大的问题解决了。<br>再然后就是今年的 IO 看到 kotlin 成为官方语言的好消息了。可喜可贺~</p>
+<hr>
+<p>后来看视频，官方宣布了在周五会有两场关于 kotlin 的演讲，其中一位是 Square 的 Jake Wharton。我突然才意识到，JW 最近在 medium 更新的那么多篇 kotlin 相关的文章代表什么意思。<br>Google 必须是提前就跟他打好交道了，所以 JW 才会在他们的团队博客上<a target="_blank" rel="noopener" href="https://medium.com/square-corner-blog/square-open-source-loves-kotlin-c57c21710a17">推广 kotlin</a>。<br>JW 在 15 年就写了<a target="_blank" rel="noopener" href="https://docs.google.com/document/d/1ReS3ep-hjxWA8kZi0YqDbEhCqTt29hG8P44aA9W0DM8/edit?usp=sharing"> 22 页文档</a>在团队里推广 kotlin，真佩服他有远见。不过也多亏 JW 的号响力吧，这两年来真的没少提过 kotlin，google 在文章里也引用了他的某次演讲。最近 JW 还会参加 kotlin 团队举办的 <a target="_blank" rel="noopener" href="https://www.kotlinconf.com/">KotlinConf</a>，真期待这个会议会讲什么有趣的内容。</p>
+<hr>
+<p>我现在也得好好充电了，三月翻完文档，敲了demo之后，我又停下来了。kotlin 刚加进去的 coroutines 也没怎么去了解。<br>现在唯二两本关于 kotlin 的书，其中一本是 <a target="_blank" rel="noopener" href="https://leanpub.com/kotlin-for-android-developers">Kotlin for Android Developers</a>，不过好贵orz<br>翻了 sample 没有什么实质内容（连全目录都没有），还不如自己好好看文档呢。<br>为什么国外的 sample 都这么小气啊……</p>
+<p>但比起书，果然更重要的还是 side project 啊。得做一个长期坚持下去的项目，这样新的东西才可以用上去。多用才是学语言最好的方式，总得有实践才行。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/android/" rel="tag"># android</a>
+              <a href="/tags/kotlin/" rel="tag"># kotlin</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/05/17/about-kiminonawa-to-another-side/" rel="prev" title="《君の名は》と《Another Side：EarthBound》">
+      <i class="fa fa-chevron-left"></i> 《君の名は》と《Another Side：EarthBound》
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/10/23/about-kotlin-scope-function/" rel="next" title="讲讲 let,with,apply,also,run">
+      讲讲 let,with,apply,also,run <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">苦辛味</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">苦辛味</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brainku.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Chap 1 认识指针1.1 指针与内存C使用内存的方式有三种：  静态&#x2F;全局内存 变量在程序开始时分配,知道程序终止时被清除. 全局变量均可访问,静态变量则只在函数定义域内可以. 自动内存 在函数内部声明,且在函数被调用时才创建.仅限函数调用期间可使用和生存. 动态内存 分配在堆上的内存.可以根据需要来分配和释放.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《深入理解C指针》 Chap1&amp;2">
+<meta property="og:url" content="https://brainku.github.io/2014/09/15/deep-in-c-pointer-ch-1-2/index.html">
+<meta property="og:site_name" content="Self Driven">
+<meta property="og:description" content="Chap 1 认识指针1.1 指针与内存C使用内存的方式有三种：  静态&#x2F;全局内存 变量在程序开始时分配,知道程序终止时被清除. 全局变量均可访问,静态变量则只在函数定义域内可以. 自动内存 在函数内部声明,且在函数被调用时才创建.仅限函数调用期间可使用和生存. 动态内存 分配在堆上的内存.可以根据需要来分配和释放.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2014-09-15T10:34:02.000Z">
+<meta property="article:modified_time" content="2016-08-20T12:42:13.000Z">
+<meta property="article:author" content="苦辛味">
+<meta property="article:tag" content="读书">
+<meta property="article:tag" content="笔记">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://brainku.github.io/2014/09/15/deep-in-c-pointer-ch-1-2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>《深入理解C指针》 Chap1&2 | Self Driven</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Self Driven</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">兴趣是1，坚持是剩下的99</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://brainku.github.io/2014/09/15/deep-in-c-pointer-ch-1-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="苦辛味">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Self Driven">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          《深入理解C指针》 Chap1&2
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2014-09-15 18:34:02" itemprop="dateCreated datePublished" datetime="2014-09-15T18:34:02+08:00">2014-09-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2016-08-20 20:42:13" itemprop="dateModified" datetime="2016-08-20T20:42:13+08:00">2016-08-20</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Chap-1-认识指针"><a href="#Chap-1-认识指针" class="headerlink" title="Chap 1 认识指针"></a>Chap 1 认识指针</h1><h2 id="1-1-指针与内存"><a href="#1-1-指针与内存" class="headerlink" title="1.1 指针与内存"></a>1.1 指针与内存</h2><p>C使用内存的方式有三种：</p>
+<ol>
+<li>静态&#x2F;全局内存<br> 变量在程序开始时分配,知道程序终止时被清除. 全局变量均可访问,静态变量则只在函数定义域内可以.</li>
+<li>自动内存<br> 在函数内部声明,且在函数被调用时才创建.仅限函数调用期间可使用和生存.</li>
+<li>动态内存<br> 分配在堆上的内存.可以根据需要来分配和释放.</li>
+</ol>
+<span id="more"></span>
+
+<blockquote>
+<p>如何阅读一个指针变量声明?<br>const int* pi <strong>一个指向整型常量的指针变量</strong><br>试着从右往左去理解.</p>
+</blockquote>
+<h2 id="1-1-8-关于NULL"><a href="#1-1-8-关于NULL" class="headerlink" title="1.1.8 关于NULL"></a>1.1.8 关于NULL</h2><p>一个自定义的宏</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> NULL ((void*)0) </span></span><br></pre></td></tr></table></figure>
+<p>可以使用这种方式来决定循环是否退出:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>* pi...</span><br><span class="line"><span class="keyword">if</span> (pi) &#123;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>void指针: 通用指针.用来存放任何类型的指针引用.<br>两个有趣的性质(?):</p>
+<ol>
+<li>void指针具有与char指针相同的形式和内存对齐方式</li>
+<li>void指针和别的指针永远不会相等,除非都是为NULL的void指针.</li>
+</ol>
+<p>任何指针都可以被赋给void指针,它也可以被转换回原来的指针类型.<br>void指针只能做数据指针,而不能用做函数指针.</p>
+<h2 id="1-2-2-size-t"><a href="#1-2-2-size-t" class="headerlink" title="1.2.2 size_t"></a>1.2.2 size_t</h2><p>size_t是C中任何对象所能达到的最大长度,它是一个<strong>无符号整数</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">int</span> <span class="type">size_t</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>要特别注意循环中的情况:</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">10</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">...</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这个循环永远不会退出. 一般不会这么用错,但是要注意 ** <code>strlen()</code> 和 <code> sizeof()</code> 返回的都是size_t**</p>
+</blockquote>
+<h2 id="1-3-1-指针算数运算"><a href="#1-3-1-指针算数运算" class="headerlink" title="1.3.1 指针算数运算"></a>1.3.1 指针算数运算</h2><p>指针的加法: 内存地址偏移 &#x3D; <strong>对应整数 * 指针数据类型对应字节数</strong><br>减法同理.<br>不过要注意void指针的情况–不建议对其进行算数运算(不过地址也可能偏移就是了,偏移量会是4字节(32位机器))</p>
+<h2 id="1-4-1-多层间接引用"><a href="#1-4-1-多层间接引用" class="headerlink" title="1.4.1 多层间接引用"></a>1.4.1 多层间接引用</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> *title[] = &#123;<span class="string">&quot;111&quot;</span>, <span class="string">&quot;222&quot;</span>, <span class="string">&quot;333&quot;</span>&#125;;</span><br><span class="line"><span class="comment">//大致上跟多维数组类似. 只是如果是多维数组会略麻烦,后面那维是必须给出-这跟C的数组表示形式有关-c多维数组在内存空间上是‘一维’的</span></span><br><span class="line"><span class="type">char</span> title[][<span class="number">3</span>] = &#123;...&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="1-4-2-常量和指针"><a href="#1-4-2-常量和指针" class="headerlink" title="1.4.2 常量和指针"></a>1.4.2 常量和指针</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> num = <span class="number">10</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> limit = <span class="number">5</span>; </span><br><span class="line"><span class="comment">//只是限制不可以通过pi修改对应的值;pi可以指向另外一个变量</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span>* pi = &amp;limit; <span class="comment">// 指向常量的整型指针---实际指向的可以不是常量;←_←他觉得自己就是指向常量的(虽然实际上它可以不是)</span></span><br><span class="line"><span class="type">int</span> <span class="type">const</span>* pi = &amp;limit; <span class="comment">// 跟上面等价</span></span><br><span class="line"><span class="comment">//指向常量会报错,因为这里可以赋值.</span></span><br><span class="line"><span class="type">int</span>* <span class="type">const</span> pi; <span class="comment">//指向非常量的常量指针. pi必须指向非常量,pi不可以指向其他变量</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span>* <span class="type">const</span> pi; <span class="comment">// 指向常量的常量指针,似乎没多大意义</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span>* <span class="type">const</span> *pi; <span class="comment">// 指向&quot;指向常量的常量指针&quot;的指针= =</span></span><br></pre></td></tr></table></figure>
+<h1 id="Chap2-C的动态内存管理"><a href="#Chap2-C的动态内存管理" class="headerlink" title="Chap2 C的动态内存管理"></a>Chap2 C的动态内存管理</h1><h2 id="2-1-动态内存管理"><a href="#2-1-动态内存管理" class="headerlink" title="2.1  动态内存管理"></a>2.1  动态内存管理</h2><ul>
+<li>C的动态内存管理: 管理的对象即从堆上分配的内存.通常是手动分配和释放的过程.(c上也存在gc的实现,只是非标准)</li>
+</ul>
+<h4 id="动态分配内存的步骤"><a href="#动态分配内存的步骤" class="headerlink" title="动态分配内存的步骤:"></a>动态分配内存的步骤:</h4><ol>
+<li>使用malloc类的函数分配内存,返回void指针</li>
+<li>使用返回的内存</li>
+<li>使用free释放对应的内存</li>
+</ol>
+<h4 id="内存泄露"><a href="#内存泄露" class="headerlink" title="内存泄露"></a>内存泄露</h4><ul>
+<li><p>丢失内存地址–分配了内存,但是无法使用. 常见于在函数中分配内存,但是未正确返回创建的地址.<br>在这个例子中,name做完循环之后就指向了原本的尾巴.前面’test’所占的内存无法利用,也无法释放.(这种情况,建议放到函数中来做)</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span>* name=(<span class="type">char</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="string">&quot;test&quot;</span>)+<span class="number">1</span>);</span><br><span class="line"><span class="built_in">strcpy</span>(name, <span class="string">&quot;test&quot;</span>);</span><br><span class="line"><span class="keyword">while</span> (*name != <span class="number">0</span>) &#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>, name);</span><br><span class="line">	name++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>未调用frre–也就是忘记释放该释放的内存.无法使用对应的内存,堆可用空间越来越少.</p>
+</li>
+</ul>
+<h2 id="2-2-动态内存分配函数"><a href="#2-2-动态内存分配函数" class="headerlink" title="2.2 动态内存分配函数"></a>2.2 动态内存分配函数</h2><p>分配的内存会根据指针的数据类型对齐. 如4字节的整数会被分配在能被4整除的边界上.</p>
+<ol>
+<li><code>malloc(size_t)</code> 在堆上直接分一块内存.返回void指针,<strong>如果分配失败返回NULL(以下同理)</strong>. 这个函数不会修改内存的数据,可以认为分配的内存中包含脏数据.<br><strong>Warning:全局和静态变量不可以在初始化的时候调用malloc分配内存,该操作需要放在函数中执行</strong></li>
+<li><code>calloc(size_t numEle, size_t eleSize)</code> 分配的同时清空内存.<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> *pi = (<span class="type">int</span>*) <span class="built_in">calloc</span>(<span class="number">5</span>, <span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line"><span class="comment">//等价 不过一般情况下calloc可能会比malloc慢</span></span><br><span class="line"><span class="type">int</span> *pi = (<span class="type">int</span>*) <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="type">int</span>) * <span class="number">5</span>);</span><br><span class="line"><span class="built_in">memset</span>(pi, <span class="number">0</span>, <span class="keyword">sizeof</span>(pi));</span><br></pre></td></tr></table></figure></li>
+<li><code>realloc(void* ptr, size_t)</code>重新分配内存.</li>
+</ol>
+<ul>
+<li><pre><code>如果分配的大小小于原本则裁剪
+</code></pre>
+</li>
+<li><pre><code>如果分配的大小大于原本,则先在本地试着增加,否则就另找一块足够
+</code></pre>
+</li>
+<li><pre><code>大的空间来进行分配,并复制到新区域.
+</code></pre>
+</li>
+<li><pre><code>如果为0, 则释放原本的内存块(类似于free)
+</code></pre>
+</li>
+</ul>
+<h2 id="2-3-关于free"><a href="#2-3-关于free" class="headerlink" title="2.3 关于free"></a>2.3 关于free</h2><p>重复调用free会导致错误(将一块已经归还系统的内存再归还是不可能的~)<br><strong>将已释放的指针赋值为NULL</strong>,以防止迷途指针.</p>
+<h2 id="2-4-迷途指针"><a href="#2-4-迷途指针" class="headerlink" title="2.4 迷途指针"></a>2.4 迷途指针</h2><p>如果内存已经释放,而指针仍然还在引用原本的内存-也就是野指针,迷途指针(过早释放).<br>可能造成的问题:</p>
+<ol>
+<li>如果通过它访问内存,则行为不可预期</li>
+<li>如果内存不可访问,则是段错误</li>
+<li>潜在的安全隐患</li>
+</ol>
+<p>常见的错误:</p>
+<ol>
+<li>释放指针后仍然对指定地址进行修改;</li>
+<li>指针别名–其中一指针释放了内存,但是另外一别名仍然继续访问.</li>
+</ol>
+<blockquote>
+<p>Ku: 跟Java不同的一种内存泄露现象.考虑下面的代码:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> *pi;</span><br><span class="line">&#123;  <span class="type">int</span> tmp = <span class="number">5</span>; pi = &amp;tmp; &#125;</span><br><span class="line">foo();</span><br></pre></td></tr></table></figure>
+<p>在外面声明一个变量,然后在另一代码块中赋值,在Java中似乎可以接受.但在这里, pi指向的是tmp这一变量,而tmp是只在该栈帧中存在的,在大括号结束之后,tmp所在栈帧就出栈了.调用foo()导致入栈,那么pi指向的就是foo()中的某块不知名内存. 也就成为了野指针.</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AF%BB%E4%B9%A6/" rel="tag"># 读书</a>
+              <a href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag"># 笔记</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2014/08/24/da-ji-xue/" rel="prev" title="打鸡血=。=">
+      <i class="fa fa-chevron-left"></i> 打鸡血=。=
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2014/09/17/deep-in-c-pointer-ch-5/" rel="next" title="《深入理解C指针》 Ch5">
+      《深入理解C指针》 Ch5 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Chap-1-%E8%AE%A4%E8%AF%86%E6%8C%87%E9%92%88"><span class="nav-number">1.</span> <span class="nav-text">Chap 1 认识指针</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E6%8C%87%E9%92%88%E4%B8%8E%E5%86%85%E5%AD%98"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 指针与内存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-8-%E5%85%B3%E4%BA%8ENULL"><span class="nav-number">1.2.</span> <span class="nav-text">1.1.8 关于NULL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-2-size-t"><span class="nav-number">1.3.</span> <span class="nav-text">1.2.2 size_t</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-1-%E6%8C%87%E9%92%88%E7%AE%97%E6%95%B0%E8%BF%90%E7%AE%97"><span class="nav-number">1.4.</span> <span class="nav-text">1.3.1 指针算数运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-1-%E5%A4%9A%E5%B1%82%E9%97%B4%E6%8E%A5%E5%BC%95%E7%94%A8"><span class="nav-number">1.5.</span> <span class="nav-text">1.4.1 多层间接引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-2-%E5%B8%B8%E9%87%8F%E5%92%8C%E6%8C%87%E9%92%88"><span class="nav-number">1.6.</span> <span class="nav-text">1.4.2 常量和指针</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chap2-C%E7%9A%84%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">Chap2 C的动态内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-number">2.1.</span> <span class="nav-text">2.1  动态内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8D%E5%86%85%E5%AD%98%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.1.0.1.</span> <span class="nav-text">动态分配内存的步骤:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2"><span class="nav-number">2.1.0.2.</span> <span class="nav-text">内存泄露</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E5%87%BD%E6%95%B0"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 动态内存分配函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-%E5%85%B3%E4%BA%8Efree"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 关于free</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-%E8%BF%B7%E9%80%94%E6%8C%87%E9%92%88"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 迷途指针</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">苦辛味</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">苦辛味</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

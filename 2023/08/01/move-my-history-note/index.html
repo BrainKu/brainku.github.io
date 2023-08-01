@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brainku.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="起因前阵子看到一个新闻，说是印象笔记母公司被收购，国外团队被裁撤，想起来自己的历史笔记还有残留在那里。这么多年来我用了很多个笔记平台，从有道笔记到印象笔记再到为知笔记，中间也穿插着使用 EverMemo、DailyOne，每个平台基本都是写了很多，写完又随意地切换到下一个平台，各个平台都留着我各个阶段的回忆。我竟没有担心笔记丢失的问题也是挺神奇的，随着平台的关停，笔记无法导出，最后一起消失这种事也">
+<meta property="og:type" content="article">
+<meta property="og:title" content="我的笔记迁移之旅">
+<meta property="og:url" content="https://brainku.github.io/2023/08/01/move-my-history-note/index.html">
+<meta property="og:site_name" content="Self Driven">
+<meta property="og:description" content="起因前阵子看到一个新闻，说是印象笔记母公司被收购，国外团队被裁撤，想起来自己的历史笔记还有残留在那里。这么多年来我用了很多个笔记平台，从有道笔记到印象笔记再到为知笔记，中间也穿插着使用 EverMemo、DailyOne，每个平台基本都是写了很多，写完又随意地切换到下一个平台，各个平台都留着我各个阶段的回忆。我竟没有担心笔记丢失的问题也是挺神奇的，随着平台的关停，笔记无法导出，最后一起消失这种事也">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://brainku.github.io/2023/08/01/move-my-history-note/WizExportSample.png">
+<meta property="og:image" content="https://brainku.github.io/2023/08/01/move-my-history-note/NoteMoveResult.png">
+<meta property="article:published_time" content="2023-08-01T12:34:13.000Z">
+<meta property="article:modified_time" content="2023-08-01T12:55:17.526Z">
+<meta property="article:author" content="苦辛味">
+<meta property="article:tag" content="笔记">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://brainku.github.io/2023/08/01/move-my-history-note/WizExportSample.png">
+
+<link rel="canonical" href="https://brainku.github.io/2023/08/01/move-my-history-note/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>我的笔记迁移之旅 | Self Driven</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Self Driven</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">兴趣是1，坚持是剩下的99</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://brainku.github.io/2023/08/01/move-my-history-note/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="苦辛味">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Self Driven">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          我的笔记迁移之旅
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-08-01 20:34:13 / 修改时间：20:55:17" itemprop="dateCreated datePublished" datetime="2023-08-01T20:34:13+08:00">2023-08-01</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h1><p>前阵子看到一个新闻，说是印象笔记母公司被收购，国外团队被裁撤，想起来自己的历史笔记还有残留在那里。<br>这么多年来我用了很多个笔记平台，从有道笔记到印象笔记再到为知笔记，中间也穿插着使用 EverMemo、DailyOne，每个平台基本都是写了很多，写完又随意地切换到下一个平台，各个平台都留着我各个阶段的回忆。<br>我竟没有担心笔记丢失的问题也是挺神奇的，随着平台的关停，笔记无法导出，最后一起消失这种事也不是没有，比如很早之前的点点，大学时代的每日一拍，也坚持了一年多了。<br>就以印象笔记关停为契机，切换到自己现在最喜欢的 Obsidian 上来。<br>而且我还有个奇怪的打算，把过去的笔记整理到一个平台之后，后续我也许能用 LLM 跑另外一个我出来。</p>
+<span id="more"></span>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>既然决定要迁移，那就得先定迁移哪些，怎么迁。<br>这次决定先处理几个完全没有再新增笔记的平台：</p>
+<ol>
+<li>有道笔记：大学期间一直在用的笔记平台，记录了很多笔记，还有课程作业这些。但毕业入职网易时因为公司网络无法访问有道，被迫放弃有道。</li>
+<li>印象笔记（EverMemo）：主要是刚开始工作时的一些记录，印象笔记的 @ 特定账号记录微博还是挺好用的。还有被用作 EverMemo 的同步平台 - EverMemo 是我工作前一两年用得比较多的碎碎念平台。</li>
+<li>为知笔记：因为有道笔记被公司禁止，我换的另外一个冷门笔记软件，网易四年工作都是用的他。到后面换工作，阿里不允许任何外部笔记软件于是又被放置。</li>
+<li>DailyOne：网易中间两年用过的手机&#x2F;平板日记软件，跟着我一起去过日本。但因为某次升级的时候改成订阅付费而放弃，笔记就一直在那。</li>
+</ol>
+<p>在选用笔记平台的时候我完全没有考虑过数据迁移到问题，只是觉得某个平台好用，于是就一直用下去。现在就是处理这种问题的时候 🤣<br><strong>四个软件里面，三个软件都去掉了全库导出的功能。</strong></p>
+<p>国内的印象笔记很早就跟母公司没有太大关系，数据跟账号都分开了。<br>全文导出功能很早前就去掉了（或者说有过这功能吗？），前几年还能针对笔记本维度导出 <code>.enex</code>，2022 年则是更加干脆地与国际版脱钩，改成了国内专供的 <code>.notes</code>，一个加密的文件，密码只有印象笔记才知道。</p>
+<p>为知笔记跟有道笔记都只能<strong>单篇</strong>导出。为知笔记还好点，起码是可以导出 html 文件的，是其他笔记软件大多支持的格式。有道导出的是 word 或 pdf，这对笔记数非常多的人来说，基本没有价值。</p>
+<p>DailyOne 是这些软件里面最好的。前几年放弃 DailyOne 的时候就一键导出了所有数据，每个日记本都是一个单独的 zip 包，解包之后是一个 json 文件以及图片资源文件，是这些软件里最好处理的。</p>
+<p>自己一个个去处理前面三个硬骨头虽然可以，但工程量巨大，想着笔记迁移的问题国内的用户应该都遇到过，果然就都有了方案~</p>
+<ol>
+<li>印象笔记：<a target="_blank" rel="noopener" href="https://github.com/vzhd1701/evernote-backup">vzhd1701&#x2F;evernote-backup: Backup &amp; export all Evernote notes and notebooks</a></li>
+<li>为知笔记：<a target="_blank" rel="noopener" href="https://github.com/zrong/wiz2joplin">zrong&#x2F;wiz2joplin: Migrate from WizNote to Joplin.</a></li>
+<li>有道笔记：<a target="_blank" rel="noopener" href="https://github.com/DeppWang/youdaonote-pull">DeppWang&#x2F;youdaonote-pull: 📝 一个一键导出 &#x2F; 备份「有道云笔记」所有笔记的 Python 脚本.</a></li>
+<li>DailyOne：自己来~</li>
+</ol>
+<p>迁移过程中也给自己定了一个规则：<br>过一遍笔记，找到这些：</p>
+<ol>
+<li>我的 #读书笔记 我的 #影评 </li>
+<li>发现自己未解决的 #课题 </li>
+<li>找到过去对自己的 #提问</li>
+</ol>
+<p>有了方案就是执行了。</p>
+<h1 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h1><h2 id="印象笔记"><a href="#印象笔记" class="headerlink" title="印象笔记"></a>印象笔记</h2><p>就算是国内的印象笔记，在 evernote-backup 的支持下也是可以完美导出 ENEX 格式的。Obsidian 官方前阵子刚好出了一个印象笔记的 Import 插件（大概也是国外印象笔记团队刚被裁员的原因），一键导入非常方便。<br>导入了印象笔记之后，发现里面更多是一些 EverMemo 的随笔记录，发现有不少自己有感触的内容，于是就删掉了导出文件，一个个过滤。最终是用 5 天才整理完的。但收获也是最大的。</p>
+<h2 id="为知笔记"><a href="#为知笔记" class="headerlink" title="为知笔记"></a>为知笔记</h2><p>为知笔记的导出非常地不顺利。<br>虽然有工具的加持，但工具因为不能跳过加密笔记（我也忘了密码），始终进行不下去。在笔记里删掉了加密笔记又会导致文件找不到的异常。通过自己手动 mock 的形式勉强再跳过，到了导入到 Joplin 生成 markdown 这一步又是 read timeout 异常。<br>一筹莫展之际打开了之前下载的一个非官方为知笔记 <a target="_blank" rel="noopener" href="https://github.com/altairwei/WizNotePlus">altairwei&#x2F;WizNotePlus: A community-driven cross-platform note-taking client.</a><br>这个软件上竟然有官方没有的全库导出功能！试着导出来看了一下，主要结构像这样：</p>
+<p><img src="/2023/08/01/move-my-history-note/WizExportSample.png"></p>
+<p>每个 note 都会有对应的一个文件夹，文件夹下一定有一个 <code>index.html</code> 或者 <code>index.md</code> ，还会有一个 <code>metainfo.json</code> 描述文件的属性，这里面有着很重要的<strong>文件创建时间</strong>。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line"><span class="attr">&quot;attachmentCount&quot;</span> <span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;category&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;/My Journals/2015-08/&quot;</span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;created&quot;</span> <span class="punctuation">:</span> <span class="number">1440903496000</span><span class="punctuation">,</span></span><br><span class="line">...</span><br><span class="line"><span class="attr">&quot;modified&quot;</span> <span class="punctuation">:</span> <span class="number">1568905497000</span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;readCount&quot;</span> <span class="punctuation">:</span> <span class="number">3</span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;tags&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;&quot;</span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;title&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;2015&quot;</span><span class="punctuation">,</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>有了这样的信息，那就简单多了。<br>我现在的目的就是将这一个个 note 文件夹转换成一个以 <code>YYYY-MM-DD-title.md</code>  的 markdown 文件。<br>这一切在 GPT 的协助下，不到两小时就搞定了。<br>梳理过的为知笔记单独删掉，剩下的都统一放到一个 <code>MoveProject</code> 的地方单独归档。</p>
+<h2 id="有道笔记"><a href="#有道笔记" class="headerlink" title="有道笔记"></a>有道笔记</h2><p>有道笔记是最早执行迁移但又是最后完成的，他的整个迁移过程让我感到糟心。<br>像之前说的我并不是一键迁移，而是先粗略看一下笔记。而打开笔记这个操作就能让有道触发一次所谓的笔记升级。<br>升级之后的笔记，<strong>文件创建时间丢失</strong>，<strong>图片丢失</strong>，点开前缩略图能看到图片，点开后都变成了裂图。<br>这样的笔记没法好好还原。<br>想起来以前就发生过这种事，有道笔记之前升级格式的时候就是 break update，我很多笔记都被迫一次性更新，笔记时间也改成了同一天。<br>只是没想到这次又体会到了，有道根本就不配做笔记软件。<br>最终有道的笔记是通过脚本简单一次性导出的，有些文件是历史的 note 文件就单独打开升级，再执行一次更新之后拿到最终产物。<br>有道笔记大部分内容直接归档。</p>
+<h2 id="DailyOne"><a href="#DailyOne" class="headerlink" title="DailyOne"></a>DailyOne</h2><p>DailyOne 的笔记迁移是最简单的。<br>把 json 格式上传到 poe，然后写下：</p>
+<blockquote>
+<p>给你这样一个文件，帮忙解析里面的内容。将 entries 里每个 object 都转换成一篇单独的 markdown 文件，文件名是 creationDate 里的时间取 YYYY-MM-DD，文件正文内容是 text</p>
+</blockquote>
+<p>在稍微完善一下细节，处理掉图片的引用，不到一小时就搞定了~</p>
+<h1 id="成果"><a href="#成果" class="headerlink" title="成果"></a>成果</h1><p>整个笔记迁移到过程大概花了我 10 小时，本来预计是要花上 50 小时的，效率还是挺不错。<br>迁移的最终产物：</p>
+<p><img src="/2023/08/01/move-my-history-note/NoteMoveResult.png"></p>
+<p>再包括整理的笔记（500+），大致上有 100w 字。</p>
+<h1 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h1><p>整理的过程中也梳理了很多自己的课题。<br>有一些问题是工作的时候就提问过，现在仍然是未解决的。<br>也有过去写下的一些提问。迷茫不知道做什么的时候，再重新回来翻一下又有不一样的感受。<br>像后视镜一样，往回看。</p>
+<p>还有我也发现，纯粹的记录没有太多意义。很像家里洗衣服，堆积了好几天的衣服一次性洗完之后晾衣服的过程是很痛苦的（。<br>我给自己定了一个 [[周六笔记日]]</p>
+<blockquote>
+<p>每周或每月花了 1、2 天时间去分析自己的记录，不断的总结、分析和思考 </p>
+</blockquote>
+<p>每个周六的早上我是有时间去做这件事的。</p>
+<p>在梳理这次笔记的过程中，我还发现我还有不少分散的笔记。像下面这些：</p>
+<table>
+<thead>
+<tr>
+<th>平台</th>
+<th>数量</th>
+<th>难度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>iNote</td>
+<td>阿里的几年记录非常频繁，应该也有 1K 条以上，闭源软件，不好处理</td>
+<td>⭐️⭐️⭐️⭐️</td>
+</tr>
+<tr>
+<td>Flomo</td>
+<td>截止当前 4246 条，但因为有 API，导出难度不大</td>
+<td>⭐️⭐️</td>
+</tr>
+<tr>
+<td>苹果备忘录</td>
+<td>大学一直到现在都偶尔有在用，听闻苹果有计划出导出的功能，等吧，不急</td>
+<td>⭐️⭐️</td>
+</tr>
+<tr>
+<td>纸质版日记</td>
+<td>初中开始一直到大三，工作后也写过两三年</td>
+<td>⭐️⭐️⭐️⭐️⭐️</td>
+</tr>
+</tbody></table>
+<p>再等宇宙一个信号~现在就放在那，偶尔回忆一下吧。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag"># 笔记</a>
+              <a href="/tags/Python/" rel="tag"># Python</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/03/03/mac-java-and-python-env-manager/" rel="prev" title="Mac 下的 Java & Python 多环境管理">
+      <i class="fa fa-chevron-left"></i> Mac 下的 Java & Python 多环境管理
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B5%B7%E5%9B%A0"><span class="nav-number">1.</span> <span class="nav-text">起因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C"><span class="nav-number">3.</span> <span class="nav-text">执行</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0"><span class="nav-number">3.1.</span> <span class="nav-text">印象笔记</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E7%9F%A5%E7%AC%94%E8%AE%B0"><span class="nav-number">3.2.</span> <span class="nav-text">为知笔记</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%89%E9%81%93%E7%AC%94%E8%AE%B0"><span class="nav-number">3.3.</span> <span class="nav-text">有道笔记</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DailyOne"><span class="nav-number">3.4.</span> <span class="nav-text">DailyOne</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%88%90%E6%9E%9C"><span class="nav-number">4.</span> <span class="nav-text">成果</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%8E%E7%BB%AD"><span class="nav-number">5.</span> <span class="nav-text">后续</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">苦辛味</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">苦辛味</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
